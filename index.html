@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>WS 工作情境 · UI/UX 展示版</title>
+<title>WS 工作情境 · 週會與卷宗 UI/UX 展示版</title>
 <meta name="robots" content="noindex,nofollow">
 <style>
 /* One portable demo. All visuals, example content and behavior are local. */
@@ -28,22 +28,237 @@ html[data-theme=carbon][data-mode=dark]{--bg:#161616;--surface:#262626;--raised:
 @media(max-width:720px){.side-header{grid-template-columns:38px minmax(0,1fr) 28px;max-width:190px}html[data-sidebar=collapsed] .sidebar .appearance{display:none}}
 @page{size:A4;margin:0}
 @media print{html,body{background:#fff!important;margin:0!important}body>*{display:none!important}body>#print-root{display:block!important}#print-root .paper-shell{width:210mm;height:297mm;aspect-ratio:auto;border:0;box-shadow:none;margin:0;break-after:page;page-break-after:always}#print-root .paper-shell:last-child{break-after:auto;page-break-after:auto}.paper{print-color-adjust:exact;-webkit-print-color-adjust:exact}.paper-shell{container-type:inline-size}}
+
+/* All colors follow the existing theme and light/dark variables. */
+.wm-local-mail{margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow-wrap:anywhere}.wm-card-note{white-space:pre-wrap;overflow-wrap:anywhere;margin-top:7px}.wm-local-mail h3{overflow-wrap:anywhere}
+.wm-toolbar{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin:16px 0}.wm-toolbar label,.wm-form label{display:grid;gap:5px;color:var(--muted);font-size:12px}.wm-toolbar select{max-width:240px}.wm-note{font-size:12px;color:var(--muted);line-height:1.7}.wm-layout{display:grid;grid-template-columns:minmax(235px,.8fr) minmax(350px,1.6fr);gap:18px;align-items:start}.wm-list{display:grid;gap:9px}.wm-topic{padding:14px;text-align:left;white-space:normal;display:block;width:100%;background:var(--surface)}.wm-topic.active{border-color:var(--brand);background:var(--selected)}.wm-topic h3{margin:7px 0}.wm-topic small{display:block}.wm-card{padding:20px;margin-bottom:14px}.wm-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.wm-form .full{grid-column:1/-1}.wm-form input,.wm-form select,.wm-form textarea{width:100%;min-width:0}.wm-form textarea{min-height:90px}.wm-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.wm-badge{display:inline-block;background:var(--selected);color:var(--brand);padding:3px 8px;border-radius:5px;font-size:11px}.wm-help{margin:14px 0;padding:12px 16px;background:var(--raised);border-radius:var(--radius)}.wm-help summary{cursor:pointer;font-weight:600}.wm-help p{margin-top:8px}.wm-empty{padding:35px 20px;text-align:center;border:1px dashed var(--line);border-radius:var(--radius);color:var(--muted)}.wm-section-title{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:16px}.wm-task-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.wm-task-grid .wm-card{margin:0}.wm-pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.9 'Segoe UI','Microsoft JhengHei',sans-serif;background:var(--raised);padding:20px;border-radius:var(--radius);margin:14px 0}.wm-editor{min-height:420px!important;line-height:1.8;font-size:14px}.wm-check{display:flex!important;align-items:center;gap:9px!important;color:var(--text)!important}.wm-check input{width:18px!important;height:18px;flex-shrink:0}.wm-source{padding:14px;background:var(--raised);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:18px;overflow-wrap:anywhere}.wm-source p{margin:7px 0;white-space:pre-wrap}.wm-history{border-top:1px solid var(--line);padding:12px 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.wm-subnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.wm-subnav button.active{background:var(--selected);border-color:var(--brand);color:var(--brand)}.wm-case-strip{margin-bottom:16px;padding:14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}.wm-case-strip details{margin-top:10px}.wm-case-strip summary{cursor:pointer}.wm-storage{font-size:11px;color:var(--muted);margin-top:8px}.wm-alert{padding:12px;border-left:3px solid var(--warning);background:var(--warning-bg);color:var(--warning);margin:12px 0}.meeting-projection .sidebar,.meeting-projection .topbar{display:none}.meeting-projection .app-shell{display:block}.meeting-projection #case-head{padding-top:20px}.meeting-projection .wm-layout{grid-template-columns:1fr;max-width:1050px;margin:auto}.meeting-projection .wm-agenda-list{display:none}.meeting-projection .wm-card h2{font-size:28px}.meeting-projection .wm-form textarea,.meeting-projection .wm-form input{font-size:17px}.meeting-projection .wm-form label,.meeting-projection .wm-note{font-size:15px}.meeting-projection .wm-context{font-size:20px;line-height:1.7}.wm-mobile-entry{display:none}
+@media(max-width:1000px){.wm-layout{grid-template-columns:1fr}.wm-list{grid-template-columns:repeat(2,minmax(0,1fr))}.wm-task-grid{grid-template-columns:1fr}}
+@media(max-width:720px){.wm-form{grid-template-columns:1fr}.wm-form .full{grid-column:auto}.wm-list{grid-template-columns:1fr}.wm-toolbar>*{max-width:100%}.wm-toolbar select{max-width:100%;width:100%}.wm-card{padding:15px}.wm-mobile-entry{display:inline-flex}.wm-header-tabs{gap:12px;overflow-x:auto}.wm-header-tabs button{white-space:normal;min-width:78px}.wm-actions button{white-space:normal}.wm-pre{padding:12px}.wm-editor{min-height:340px!important}.topbar{height:auto;min-height:64px;flex-wrap:wrap;padding:12px 16px}.topbar-actions{flex-wrap:wrap}.wm-toolbar label{flex:1 1 130px}}
+@media print{body.wm-print .app-shell,body.wm-print dialog,body.wm-print .toast{display:none!important}body.wm-print #print-root{display:block!important}body.wm-print .wm-pre{background:white;color:black;font:12pt/1.6 'Microsoft JhengHei',sans-serif;white-space:pre-wrap;overflow:visible}}
+
+</style>
+<style id="demo-glass-style">
+/* Liquid Glass UI v1.1.0 — derived from the user-approved 2026-09-30 HTML samples.
+   Scope all components within .lg-ui. No font, network, build or framework dependency. */
+.lg-ui {
+  --lg-density:.45;
+  --lg-scene-base:#122a3b;
+  --lg-scene-cool:#467b86;
+  --lg-scene-warm:#6b624c;
+  --lg-fg:#f4f8fb;
+  --lg-muted:#b5c5d0;
+  --lg-accent:#add5f4;
+  --lg-fill:rgb(255 255 255 / calc(.025 + var(--lg-density) * .165));
+  --lg-rim:#ffffff7a;
+  --lg-shadow:#0000004d;
+  --lg-active:#d6ebff24;
+  --lg-shine:.19;
+  --lg-blur:calc(8px + var(--lg-density) * 23px);
+  --lg-quiet-blur:calc(5.5px + var(--lg-density) * 10px);
+  --lg-fallback:#203542;
+  --lg-quiet-fill:rgb(164 204 231 / calc(.03 + var(--lg-density) * .1));
+  --lg-quiet-glint:rgb(239 248 255 / .15);
+  --lg-quiet-rim:rgb(239 248 255 / .52);
+  --lg-quiet-shadow:rgb(0 0 0 / .35);
+  --lg-primary-fill:rgb(143 201 240 / calc(.09 + var(--lg-density) * .2));
+  --lg-button-size:44px;
+  --lg-icon-size:22px;
+}
+.lg-ui[data-lg-theme="light"], [data-lg-theme="light"] .lg-ui {
+  --lg-scene-base:#e8edef;
+  --lg-scene-cool:#b0d6de;
+  --lg-scene-warm:#edcfa6;
+  --lg-fg:#163c56;
+  --lg-muted:#596c7c;
+  --lg-accent:#075a9c;
+  --lg-rim:#ffffffed;
+  --lg-shadow:#173b5226;
+  --lg-active:#ffffff80;
+  --lg-shine:.64;
+  --lg-fallback:#e2ecf2;
+  --lg-quiet-fill:rgb(7 90 156 / calc(.03 + var(--lg-density) * .1));
+  --lg-quiet-glint:rgb(255 255 255 / .65);
+  --lg-quiet-rim:rgb(255 255 255 / .9);
+  --lg-quiet-shadow:rgb(20 49 72 / .16);
+  --lg-primary-fill:rgb(48 139 204 / calc(.11 + var(--lg-density) * .2));
+}
+/* Opt in on a dedicated wrapper. Never attach to an existing image background. */
+.lg-ui.lg-scene { background:var(--lg-scene-base); color:var(--lg-fg); }
+.lg-ui.lg-scene[data-lg-background="ambient"] {
+  background:radial-gradient(ellipse at 85% 0%,var(--lg-scene-cool),transparent 55%),radial-gradient(ellipse at 4% 0%,var(--lg-scene-warm),transparent 40%),var(--lg-scene-base);
+}
+.lg-ui .lg-toolbar { display:flex; align-items:center; flex-wrap:wrap; gap:9px; }
+.lg-ui .lg-surface {
+  box-sizing:border-box; position:relative; isolation:isolate; border-radius:32px;
+  background:var(--lg-fill); color:var(--lg-fg); border:1px solid #ffffff30;
+  backdrop-filter:blur(var(--lg-blur)) saturate(1.5);
+  -webkit-backdrop-filter:blur(var(--lg-blur)) saturate(1.5);
+  box-shadow:inset 0 1px 0 var(--lg-rim),inset 0 -1px 0 #ffffff1c,inset 1px 0 1px #ffffff24,inset -1px 0 1px #ffffff14,0 9px 22px -8px var(--lg-shadow),0 2px 5px #0000000d;
+}
+.lg-ui .lg-surface::before {
+  content:""; pointer-events:none; position:absolute; inset:0; border-radius:inherit; z-index:-1;
+  background:linear-gradient(155deg,#ffffff24 0%,#ffffff06 26%,transparent 47%,#ffffff09 77%,#ffffff20 100%);
+}
+.lg-ui .lg-surface::after {
+  content:""; pointer-events:none; position:absolute; inset:0; border-radius:inherit; z-index:-1; opacity:0;
+  background:radial-gradient(105px 70px at var(--lg-pointer-x,50%) var(--lg-pointer-y,0%),rgb(255 255 255 / var(--lg-shine)),transparent 95%);
+  transition:opacity .25s;
+}
+.lg-ui .lg-group { display:inline-flex; align-items:center; gap:1px; padding:5px; }
+.lg-ui .lg-button {
+  box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; position:relative;
+  width:var(--lg-button-size); height:var(--lg-button-size); min-width:var(--lg-button-size); flex:0 0 var(--lg-button-size);
+  padding:0; border:1px solid transparent; border-radius:50%; background:transparent; color:var(--lg-fg);
+  font:inherit; cursor:pointer; touch-action:manipulation;
+  transition:background-color .18s,color .18s,box-shadow .18s,transform .2s cubic-bezier(.2,.8,.2,1);
+}
+.lg-ui .lg-icon { display:block; width:var(--lg-icon-size); height:var(--lg-icon-size); stroke-width:1.7; pointer-events:none; }
+.lg-ui .lg-button[aria-pressed="true"],
+.lg-ui .lg-button[aria-expanded="true"],
+.lg-ui .lg-button[aria-current="page"] {
+  background:var(--lg-active);
+  box-shadow:inset 0 1px 0 #ffffff99,inset 0 -1px 0 #ffffff21,0 2px 5px #00000014;
+}
+.lg-ui .lg-button:active:not(:disabled) { transform:scale(.93); background:#ffffff26; }
+.lg-ui .lg-button:disabled { cursor:default; opacity:.35; }
+.lg-ui .lg-button:focus-visible,
+.lg-ui .lg-action:focus-visible,
+.lg-ui .lg-text-action:focus-visible { outline:2px solid var(--lg-accent); outline-offset:3px; }
+/* Quiet profile for controls inside content. Use one surface, with ordinary buttons on it. */
+.lg-ui .lg-quiet {
+  border-radius:99px; border-color:rgb(109 159 195 / .45);
+  background:linear-gradient(160deg,var(--lg-quiet-glint),transparent 45%,rgb(255 255 255 / .07)),var(--lg-quiet-fill);
+  box-shadow:inset 0 1px 0 var(--lg-quiet-rim),inset 0 -1px 0 rgb(255 255 255 / .1),0 4px 12px -5px var(--lg-quiet-shadow);
+  backdrop-filter:blur(var(--lg-quiet-blur)) saturate(1.25); -webkit-backdrop-filter:blur(var(--lg-quiet-blur)) saturate(1.25);
+}
+.lg-ui .lg-quiet::before,.lg-ui .lg-quiet::after { display:none; }
+.lg-ui .lg-action {
+  box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:9px 12px; min-height:44px; font:inherit; font-size:14px; line-height:1.4;
+  text-decoration:none; cursor:pointer; touch-action:manipulation; vertical-align:middle;
+  transition:box-shadow .18s,background-color .18s,transform .18s;
+}
+.lg-ui .lg-action--primary { --lg-quiet-fill:var(--lg-primary-fill); }
+.lg-ui .lg-action--secondary { border:1px solid rgb(123 161 187 / .4); border-radius:99px; background:transparent; color:var(--lg-accent); }
+.lg-ui .lg-action:active:not(:disabled) { transform:scale(.98); }
+.lg-ui .lg-action:disabled { cursor:default; opacity:.35; }
+.lg-ui .lg-text-action { color:var(--lg-muted); text-decoration:underline; text-underline-offset:4px; font:inherit; padding:9px 12px; }
+.lg-ui .lg-pagination { display:inline-flex; align-items:center; gap:15px; padding:4px 7px; }
+.lg-ui .lg-page-label { min-width:80px; text-align:center; font-size:14px; font-weight:650; font-variant-numeric:tabular-nums; letter-spacing:1px; }
+@media (hover:hover) and (pointer:fine) {
+  .lg-ui .lg-surface:hover::after { opacity:1; }
+  .lg-ui .lg-button:hover:not(:disabled) { background:#ffffff17; box-shadow:inset 0 1px 0 #ffffff65,0 2px 5px #00000014; transform:translateY(-1px); }
+  .lg-ui .lg-quiet .lg-button:hover:not(:disabled) { background:rgb(150 199 233 / .2); }
+  .lg-ui .lg-button:active:not(:disabled) { transform:scale(.93); }
+  .lg-ui .lg-action:hover:not(:disabled) { box-shadow:inset 0 1px 0 var(--lg-quiet-rim),0 6px 15px -5px var(--lg-quiet-shadow); background-color:rgb(118 177 217 / .11); }
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+  .lg-ui .lg-surface { background:var(--lg-fallback); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .lg-ui .lg-surface::after { display:none; }
+  .lg-ui .lg-button,.lg-ui .lg-action { transition:none!important; transform:none!important; }
+}
+@media (prefers-reduced-transparency:reduce) {
+  .lg-ui .lg-surface { background:var(--lg-fallback); backdrop-filter:none; -webkit-backdrop-filter:none; }
+  .lg-ui .lg-surface::before,.lg-ui .lg-surface::after { display:none; }
+}
+@media (forced-colors:active) {
+  .lg-ui.lg-scene,.lg-ui.lg-scene[data-lg-background="ambient"] { background:Canvas; color:CanvasText; }
+  .lg-ui .lg-surface { background:Canvas; color:CanvasText; border:1px solid CanvasText; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none; }
+  .lg-ui .lg-surface::before,.lg-ui .lg-surface::after { display:none; }
+  .lg-ui .lg-button,.lg-ui .lg-action { color:ButtonText; border-color:ButtonText; box-shadow:none; }
+  .lg-ui .lg-button[aria-pressed="true"],.lg-ui .lg-button[aria-expanded="true"],.lg-ui .lg-button[aria-current="page"] { outline:2px solid Highlight; }
+}
+@media print {
+  .lg-ui.lg-scene { background:white!important; color:black; }
+  .lg-ui .lg-surface { background:transparent; color:inherit; border:1px solid currentColor; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none; }
+  .lg-ui .lg-surface::before,.lg-ui .lg-surface::after { display:none; }
+  .lg-ui .lg-button,.lg-ui .lg-action,.lg-ui .lg-text-action { color:inherit; box-shadow:none; transform:none; }
+}
+
+/* Optional tuning panel; copy only when the project needs interactive controls. */
+.lg-controls {
+  --lg-panel-bg:#182127; --lg-panel-fg:#e8edf0; --lg-panel-line:#849da55c;
+  display:flex; align-items:center; flex-wrap:wrap; gap:18px;
+  margin:22px 0; padding:18px; border:1px solid var(--lg-panel-line); border-radius:18px;
+  color:var(--lg-panel-fg); background:var(--lg-panel-bg); font:inherit; font-size:14px;
+}
+.lg-controls[data-lg-theme="light"] { --lg-panel-bg:#f8f9fa; --lg-panel-fg:#233a49; --lg-panel-line:#637c905c; }
+.lg-controls label { display:flex; align-items:center; flex-wrap:wrap; gap:10px; }
+.lg-controls input[type="range"] { width:150px; min-height:44px; accent-color:#598cac; }
+.lg-controls output { font-variant-numeric:tabular-nums; min-width:4ch; }
+.lg-controls select,.lg-controls button {
+  min-height:44px; border:1px solid var(--lg-panel-line); border-radius:12px;
+  color:var(--lg-panel-fg); background:var(--lg-panel-bg); padding:8px 12px; font:inherit;
+}
+.lg-controls button { cursor:pointer; }
+.lg-controls :is(input,select,button,textarea):focus-visible { outline:2px solid #598cac; outline-offset:3px; }
+.lg-controls textarea { flex:1 0 100%; width:100%; min-height:130px; padding:14px; box-sizing:border-box;
+  border:1px solid var(--lg-panel-line); border-radius:12px; color:var(--lg-panel-fg); background:var(--lg-panel-bg); }
+.lg-controls [hidden] { display:none!important; }
+@media print { .lg-controls { display:none!important; } }
+
+/* Project integration. The material itself comes from Liquid Glass UI v1.1.0. */
+body.lg-ui{--lg-scene-base:var(--bg);--lg-scene-cool:#263f48;--lg-scene-warm:#413c30}
+body.lg-ui[data-lg-theme=light]{--lg-scene-base:var(--bg);--lg-scene-cool:#d3e5ea;--lg-scene-warm:#efe1c9}
+body.lg-ui.lg-scene{color:var(--text);background-attachment:fixed}
+.lg-ui .topbar{height:auto;min-height:66px;padding-top:6px;padding-bottom:6px;background:var(--surface)}
+.lg-ui[data-lg-background=ambient] .topbar{background:radial-gradient(ellipse at 90% 0%,var(--lg-scene-cool),transparent 75%),radial-gradient(ellipse at 5% 0%,var(--lg-scene-warm),transparent 60%),var(--bg)}
+.lg-ui .topbar-actions{flex-wrap:wrap;justify-content:flex-end}
+.lg-ui .glass-toolbar{flex-wrap:wrap;gap:3px;border-radius:30px}
+.lg-ui .glass-toolbar .lg-button{width:auto;min-width:44px;flex:0 0 auto;border-radius:24px;padding:0 12px;height:44px;font-size:12px}
+.lg-ui .glass-toolbar .lg-button.primary{background:var(--lg-primary-fill);color:var(--lg-accent);border-color:rgb(109 159 195 / .4);filter:none}
+.lg-ui .glass-toolbar svg.icon{width:19px;height:19px;stroke-width:1.7}
+.lg-ui button.lg-action{font-size:12px;min-height:36px;padding:7px 12px;color:var(--lg-fg);white-space:normal}
+.lg-ui button.lg-action.primary{background:linear-gradient(160deg,var(--lg-quiet-glint),transparent 45%),var(--lg-primary-fill);color:var(--lg-accent);border-color:rgb(109 159 195 / .5);filter:none;font-weight:600}
+.lg-ui .glass-pagination{gap:2px;padding:3px;min-width:0;flex-wrap:wrap}
+.lg-ui .glass-pagination .lg-button{width:36px;height:36px;min-width:36px;flex-basis:36px}
+.lg-ui .glass-pagination .glass-page-text{width:auto;flex-basis:auto;padding:0 10px;font-size:12px}
+.lg-ui .preview-bottom{flex-wrap:wrap;gap:8px}
+.lg-ui .sidebar-toggle.lg-action{width:28px;height:30px;min-height:30px;padding:4px}
+.lg-ui .glass-panel{width:min(440px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:0;border-radius:20px;border:1px solid var(--line);background:var(--surface);color:var(--text);overflow:auto}
+.glass-panel::backdrop{background:#10232d60;backdrop-filter:blur(3px)}
+.glass-panel .dialog-head{padding:17px 20px}.glass-panel h2{font-size:17px}
+.glass-panel .lg-controls{margin:0;border:0;border-radius:0;background:var(--surface);color:var(--text);padding:20px;gap:17px;display:grid;grid-template-columns:1fr}
+.glass-panel .lg-controls label{display:grid;grid-template-columns:1fr auto;gap:8px;margin:0;font-size:13px}
+.glass-panel .lg-controls input[type=range]{grid-column:1/-1;grid-row:2;width:100%;margin:0;padding:0;accent-color:var(--brand)}
+.glass-panel .lg-controls select{grid-column:1/-1;width:100%;background:var(--surface);color:var(--text);border-color:var(--line)}
+.glass-panel .lg-controls output{font-weight:600;color:var(--brand)}
+.glass-panel .glass-control-actions{display:flex;gap:8px;flex-wrap:wrap}
+.glass-panel .lg-controls button,.glass-panel .lg-controls textarea{color:var(--text);background:var(--raised);border-color:var(--line)}
+.glass-panel .lg-controls textarea{min-width:0;min-height:110px;font:12px/1.7 Consolas,monospace}
+.glass-panel .glass-note{color:var(--muted);font-size:12px;line-height:1.7}
+@media(max-width:720px){.lg-ui .topbar{padding:10px 12px}.lg-ui .topbar-actions{justify-content:center;width:100%}.lg-ui .glass-toolbar{width:100%;justify-content:center}.lg-ui .glass-toolbar .lg-button{padding:0 9px;gap:5px;font-size:11px}.lg-ui .workspace-intro>.row{flex-wrap:wrap}.lg-ui .case-title-actions{flex-wrap:wrap}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.lg-ui button.lg-action.primary{background:var(--lg-fallback)}}
+@media(prefers-reduced-transparency:reduce){.lg-ui button.lg-action.primary{background:var(--lg-fallback)}}
+@media(forced-colors:active){body.lg-ui.lg-scene,.lg-ui[data-lg-background=ambient] .topbar{background:Canvas;color:CanvasText}.lg-ui button.lg-action.primary,.lg-ui .glass-toolbar .lg-button.primary{background:ButtonFace;color:ButtonText;border-color:ButtonText}}
+@media print{.glass-panel{display:none!important}body.lg-ui.lg-scene{background:white!important}}
+
 </style>
 </head>
-<body>
+<body class="lg-ui lg-scene" data-lg-theme="light" data-lg-background="plain">
 <div class="app-shell">
   <aside class="sidebar" id="demo-sidebar" aria-label="案例與外觀">
-    <div class="side-header"><div class="brand-mark" aria-hidden="true">WS</div><div class="brand-copy"><div class="brand-name">工作情境</div><div class="brand-caption">WORK STORIES</div></div><button class="sidebar-toggle ghost" id="sidebar-toggle" data-action="toggle-sidebar" aria-controls="demo-sidebar" aria-expanded="true" aria-label="收合側邊欄" title="收合側邊欄"></button></div>
+    <div class="side-header"><div class="brand-mark" aria-hidden="true">WS</div><div class="brand-copy"><div class="brand-name">工作情境</div><div class="brand-caption">WORK STORIES</div></div><button class="sidebar-toggle ghost lg-action lg-surface lg-quiet" id="sidebar-toggle" data-action="toggle-sidebar" aria-controls="demo-sidebar" aria-expanded="true" aria-label="收合側邊欄" title="收合側邊欄"></button></div>
     <nav class="side-nav" aria-label="主要導覽"><button data-action="home" id="nav-home" aria-label="案件一覽" title="案件一覽"></button><button data-action="nav" data-tab="dossier" id="nav-dossier" aria-label="卷宗編排" title="卷宗編排"></button></nav>
     <div class="side-cases"><div class="side-heading">示範案例 / CASES</div><div id="case-shortcuts"></div><button class="ghost small" data-action="new-case" style="width:100%" aria-label="建立示範案件" title="建立示範案件"><span aria-hidden="true">＋</span><span class="side-label">建立示範案件</span></button></div>
     <details class="appearance" open><summary>外觀比較 <span class="muted">⌄</span></summary><div class="theme-grid" id="themes"></div><div class="mode-switch" id="modes"></div></details>
-    <div class="side-bottom"><span class="dot" style="color:var(--success)"></span> 本機互動示範<br>只為聽見你的使用感受。<br><span class="mono">UI/UX POC · 01</span></div>
+    <div class="side-bottom"><span class="dot" style="color:var(--success)"></span> 本機互動示範<br>只為聽見你的使用感受。<br><span class="mono">UI/UX POC · v2.0</span></div>
   </aside>
-  <main class="main"><header class="topbar"><div class="topbar-title">WS 業務課 <span style="margin:0 12px;color:var(--line)">/</span> <strong>前端體驗室</strong></div><div class="topbar-actions"><span class="demo-label">概念示範・內容為示例</span><button class="ghost small" data-action="guide" id="guide-button"></button><button class="ghost small" data-action="feedback-shared">大家的回饋</button><button class="primary small" data-action="feedback" id="feedback-button"></button></div></header><section class="case-head" id="case-head"></section><div class="stage" id="stage"></div></main>
+  <main class="main"><header class="topbar"><div class="topbar-title">WS 業務課 <span style="margin:0 12px;color:var(--line)">/</span> <strong>前端體驗室</strong></div><div class="topbar-actions"><span class="demo-label">概念示範・內容為示例</span><div class="glass-toolbar lg-group lg-surface" role="group" aria-label="操作與回饋"><button class="ghost small lg-button" data-action="guide" id="guide-button"></button><button class="ghost small lg-button" data-action="feedback-shared">大家的回饋</button><button class="primary small lg-button" data-action="feedback" id="feedback-button"></button><button type="button" class="lg-button" id="glass-open" data-glass-open aria-haspopup="dialog" aria-controls="glass-panel" aria-expanded="false"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16 M4 17h16 M9 4v6 M15 14v6"/></svg>玻璃外觀</button></div></div></header><section class="case-head" id="case-head"></section><div class="stage" id="stage"></div></main>
 </div>
 <div id="guide-container"></div><div id="toast" class="toast" role="status" aria-live="polite"></div>
 <dialog id="dialog" aria-labelledby="dialog-title"><header class="dialog-head"><h2 id="dialog-title"></h2><button class="icon-btn ghost" data-action="close" aria-label="關閉對話框">✕</button></header><div class="dialog-body" id="dialog-body"></div></dialog>
 <input type="file" id="local-files" multiple hidden><div id="print-root"></div>
+<dialog class="glass-panel" id="glass-panel" aria-labelledby="glass-title"><header class="dialog-head"><h2 id="glass-title">玻璃外觀調節</h2><button type="button" class="icon-btn ghost" data-glass-close aria-label="關閉外觀調節">✕</button></header>
+<form class="lg-controls" id="glass-controls" aria-label="玻璃外觀設定">
+<label for="glass-density">玻璃濃度 <output for="glass-density" data-lg-density-output>45%</output><input id="glass-density" data-lg-density type="range" min="0" max="100" step="1" value="45"></label>
+<label for="glass-background">光影背景 <select id="glass-background" data-lg-background><option value="plain">純色 · 低調</option><option value="ambient">光影 · 冷暖層次</option></select></label>
+<label for="glass-theme">深淺色調 <select id="glass-theme" data-lg-theme><option value="light">淺色</option><option value="dark">深色</option></select></label>
+<p class="glass-note">工具欄較明顯，內容內按鈕較淡。正文、表格與資料卡維持清楚底色。調整會保留在這個瀏覽器，深淺色與左側外觀比較同步。</p>
+<div class="glass-control-actions"><button type="button" data-lg-reset>重設外觀</button><button type="button" data-lg-export>匯出設定</button></div>
+<textarea data-lg-settings hidden readonly aria-label="外觀設定 JSON，可複製"></textarea></form></dialog>
 <noscript>請使用允許 JavaScript 的 Edge 或 Chrome 開啟這份互動 Demo。</noscript>
 <script id="demo-model">
 // Small, disposable state for this demonstration; not a future platform model.
@@ -79,7 +294,7 @@ globalThis.DemoModel=(()=>{
     chosen.forEach(d=>{entries.push({id:d.id,title:d.title,start:cursor,count:d.kinds.length});cursor+=d.kinds.length;});
     const base={caseId:c.id,caseName:c.name,customer:c.customer,period:c.period};
     const result=[{...base,kind:'cover',title:c.name},...Array.from({length:tocCount},(_,i)=>({...base,kind:'toc',title:'卷宗目錄',entries:entries.slice(i*12,(i+1)*12)})),{...base,kind:'summary',title:'案件摘要與履歷',text:c.summary,stale:c.stale}];
-    chosen.forEach(d=>d.kinds.forEach((kind,i)=>result.push({...base,kind,title:d.title,docId:d.id,status:d.status,date:d.date,filename:d.filename,part:i+1,parts:d.kinds.length})));
+    chosen.forEach(d=>d.kinds.forEach((kind,i)=>result.push({...base,kind,title:d.title,docId:d.id,status:d.status,date:d.date,filename:d.filename,part:i+1,parts:d.kinds.length,text:d.text?d.text.slice(i*600,(i+1)*600):undefined})));
     return result.map((p,i)=>({...p,number:i+1,total:result.length}));
   }
   function edit(state,id,fn){const s=copy(state);const c=s.cases[id];if(!c)return s;fn(c,s);return s;}
@@ -137,12 +352,169 @@ globalThis.DemoFeedback=(()=>{
   return {folderName,app,record,read,write};
 })();
 </script>
+<script id="liquid-glass-controls">
+/* Optional controls. No storage, network access or dependency on pointer lighting. */
+(() => {
+  'use strict';
+  const defaults = Object.freeze({density:45, theme:'dark', background:'plain'});
+  const mounted = new WeakMap();
+  function normalize(settings = {}) {
+    const density = (typeof settings.density === 'number' || typeof settings.density === 'string')
+      && String(settings.density).trim() !== '' ? Number(settings.density) : NaN;
+    return {
+      density:Number.isFinite(density) ? Math.round(Math.max(0,Math.min(100,density))) : defaults.density,
+      theme:settings.theme === 'light' ? 'light' : 'dark',
+      background:settings.background === 'ambient' ? 'ambient' : 'plain'
+    };
+  }
+  function apply(target, settings = defaults) {
+    if (!target?.classList?.contains('lg-ui')) throw new TypeError('Target must be an .lg-ui element');
+    const state = normalize(settings);
+    target.style.setProperty('--lg-density',String(state.density / 100));
+    target.dataset.lgTheme = state.theme;
+    target.dataset.lgBackground = state.background;
+    return {...state};
+  }
+  function mount(panel, target, options = {}) {
+    if (mounted.has(panel)) return mounted.get(panel);
+    let state = normalize(options.settings), disposed = false;
+    const field = name => panel.querySelector('[data-lg-'+name+']');
+    const density = field('density'), theme = field('theme'), background = field('background');
+    function sync() {
+      state = apply(target,state);
+      panel.dataset && (panel.dataset.lgTheme = state.theme);
+      if (density) density.value = String(state.density);
+      if (theme) theme.value = state.theme;
+      if (background) background.value = state.background;
+      const output = field('density-output');
+      if (output) output.textContent = state.density+'%';
+      const exported = field('settings');
+      if (exported) exported.value = JSON.stringify(state,null,2);
+      options.onChange?.({...state});
+    }
+    function input(event) {
+      if (event.target !== density || !density) return;
+      state.density = density.value; sync();
+    }
+    function change(event) {
+      if (event.target === theme && theme) state.theme = theme.value;
+      else if (event.target === background && background) state.background = background.value;
+      else return;
+      sync();
+    }
+    function click(event) {
+      const button = event.target.closest?.('[data-lg-reset], [data-lg-export]');
+      if (!button || !panel.contains(button)) return;
+      if (button.hasAttribute('data-lg-reset')) controller.reset();
+      if (button.hasAttribute('data-lg-export')) {
+        const output = field('settings');
+        if (output) { output.hidden = false; output.focus(); output.select(); }
+      }
+    }
+    const controller = {
+      getSettings:() => ({...state}),
+      setSettings(settings) { if (!disposed) { state = normalize({...state,...settings}); sync(); } },
+      reset() { if (!disposed) { state = {...defaults}; sync(); } },
+      dispose() {
+        panel.removeEventListener('input',input); panel.removeEventListener('change',change);
+        panel.removeEventListener('click',click); mounted.delete(panel); disposed = true;
+      }
+    };
+    sync();
+    panel.addEventListener('input',input); panel.addEventListener('change',change); panel.addEventListener('click',click);
+    mounted.set(panel,controller);
+    return controller;
+  }
+  window.LiquidGlassControls = Object.freeze({defaults,apply,mount});
+})();
+
+</script>
+<script id="weekly-model">
+// Author source, embedded by build-weekly.cjs. The delivered file is standalone.
+globalThis.WeeklyModel=(()=>{
+ const clone=x=>JSON.parse(JSON.stringify(x)), now=()=>new Date().toISOString();
+ function week(s,key){return s.meeting.weeks[key]??=( {id:key,date:key+'T09:30',host:'主持人',clerk:'業務 E',status:'會前準備',order:[],drafts:{},versions:{minutes:[],report:[]},backups:[],reportIds:[]} );}
+ function uid(s,p){return p+'-'+(++s.meeting.sequence);}
+ function addTopic(s,key,data){const id=uid(s,'topic');const t={id,week:key,title:'',proposer:s.meeting.role,owner:'',category:'需討論',progress:'',question:'',source:'一般議題（合成）',caseId:'',attachmentIds:[],discussion:'',decision:'',responsible:'',due:'',next:'',internal:false,excluded:false,updatedAt:now(),...data};s.meeting.topics[id]=t;week(s,key).order.push(id);return t;}
+ function init(s){if(s.meeting)return;s.meeting={schema:2,sequence:10,active:'2026-09-14',role:'業務 A',topics:{},tasks:{},weeks:{}};
+  ['2026-09-07','2026-09-14','2026-09-21'].forEach(k=>week(s,k));
+  s.meeting.tasks={t1:{id:'t1',title:'確認追加紙箱規格與費用',caseId:'frdc',owner:'業務 A',due:'2026-09-16',originalDue:'2026-09-16',status:'待處理',createdWeek:'2026-09-07',updates:{'2026-09-07':'已送出尺寸詢問（合成）','2026-09-14':'等待示例供應商回覆'},updatedAt:now()},t2:{id:'t2',title:'確認來訪行程',caseId:'cmw',owner:'業務 B',due:'2026-09-10',originalDue:'2026-09-10',status:'已完成',createdWeek:'2026-09-07',updates:{'2026-09-07':'已完成行程核對（合成）'},updatedAt:now()}};
+  addTopic(s,'2026-09-07',{title:'包裝條件確認',caseId:'frdc',taskId:'t1',owner:'業務 A',progress:'已送出尺寸詢問（合成）',decision:'持續確認包裝條件',responsible:'業務 A',due:'2026-09-16',next:'取得紙箱尺寸',source:'前週合成追蹤'});
+  addTopic(s,'2026-09-14',{title:'RFQ 包裝更新進度',caseId:'frdc',owner:'業務 A',progress:'兩輪報價已提出，包裝更新待確認（合成）',question:'是否追加紙箱包裝？',source:'引用案件 · 合成摘要',attachmentIds:['q2']});
+  addTopic(s,'2026-09-14',{title:'來訪資料整理',caseId:'cmw',owner:'業務 B',category:'情報共有',progress:'來訪行程與簡報已備妥（合成）',source:'引用來訪案件'});
+  addTopic(s,'2026-09-14',{title:'合成內部底價討論',owner:'業務 C',category:'需討論',progress:'供部門討論用的合成項目',question:'內部評估方式尚待確認',internal:true,source:'口頭交辦（合成）'});
+  carry(s,'2026-09-14',['t1']);
+  s.meeting.weeks['2026-09-14'].reportIds=topics(s,'2026-09-14').filter(t=>!t.internal).map(t=>t.id);
+ }
+ function topics(s,key){return week(s,key).order.map(id=>s.meeting.topics[id]).filter(Boolean);}
+ function priorUpdate(t,key){return Object.entries(t.updates).filter(([k])=>k<key).sort(([a],[b])=>b.localeCompare(a))[0]?.[1]||'尚無前週紀錄';}
+ function carry(s,key,ids){const added=[];for(const id of ids){const t=s.meeting.tasks[id];if(!t||t.status==='已完成'||t.createdWeek>=key||topics(s,key).some(x=>x.taskId===id))continue;added.push(addTopic(s,key,{title:t.title,owner:t.owner,caseId:t.caseId,category:'追蹤',taskId:id,internal:!!t.internal,source:'沿用任務 '+id,progress:t.updates[key]||'',question:'本週是否需要協調？'}));}return added;}
+ function updateTask(s,id,key,patch){const t=s.meeting.tasks[id];if(!t)return;const {progress,...fields}=patch;Object.assign(t,fields);if(progress!==undefined)t.updates[key]=progress;t.updatedAt=now();for(const x of topics(s,key))if(x.taskId===id){x.progress=t.updates[key]||'';x.updatedAt=t.updatedAt;}}
+ function taskFromTopic(s,id){const x=s.meeting.topics[id];if(x.taskId)return s.meeting.tasks[x.taskId];if(!x.decision.trim())throw Error('請先填寫決議');const key=uid(s,'task');const t={id:key,title:x.next||x.decision,caseId:x.caseId,owner:x.responsible,due:x.due,originalDue:x.due,status:'待處理',createdWeek:x.week,internal:!!x.internal,updates:{[x.week]:x.progress},updatedAt:now()};s.meeting.tasks[key]=t;x.taskId=key;return t;}
+ function rows(s,key,kind){const w=week(s,key);const selected=kind==='report'?w.reportIds.map(id=>s.meeting.topics[id]).filter(x=>x&&x.week===key&&!x.excluded&&!x.internal):topics(s,key).filter(x=>!x.excluded);return selected.map(x=>{const task=s.meeting.tasks[x.taskId],c=s.cases[x.caseId];return {id:x.id,caseId:x.caseId,title:x.title,source:x.source,caseName:c?.name||'一般情報',proposer:x.proposer,owner:x.owner,progress:task?.updates[key]||x.progress,question:x.question,discussion:x.discussion,decision:x.decision,responsible:x.responsible,due:x.due,next:x.next,internal:x.internal,task:task?clone(task):null,caseStatus:c?.status||'',caseSummary:c?.summary||'',updatedAt:[x.updatedAt,task?.updatedAt,c?.weeklyUpdatedAt].filter(Boolean).sort().at(-1)||''};});}
+ function signature(s,key,kind){const w=week(s,key);return JSON.stringify({date:w.date,host:w.host,clerk:w.clerk,rows:rows(s,key,kind)});}
+ function minuteRow(r){return `${r.title}\n來源：${r.caseName} / ${r.source}\n本週進度：${r.progress||'待補'}\n待討論：${r.question||'未填'}\n本次討論：${r.discussion||'待補'}\n決議：${r.decision||'待補'}\n責任人：${r.responsible||'待確認'}；期限：${r.due||'待確認'}\n下一步：${r.next||'待補'}${r.task?'\n追蹤 '+r.task.id+'：'+r.task.title+' / '+r.task.status+' / '+(r.task.owner||'待確認')+' / '+(r.task.due||'待確認'):''}`;}
+ function textFor(s,key,kind,rr){const w=week(s,key);if(kind==='minutes')return `WS 部門週會｜會議紀錄草稿\n日期：${w.date.replace('T',' ')}\n主持人：${w.host}；值日生：${w.clerk}\n依已填欄位整理的示範草稿，未使用 AI／語音辨識\n\n${rr.map((r,i)=>`${i+1}. ${minuteRow(r)}`).join('\n\n')}\n\n追蹤表（產稿當時）\n${rr.filter(r=>r.task).map(r=>`${r.task.id}｜${r.task.title}｜${r.task.status}｜${r.task.owner||'待確認'}｜${r.task.due||'待確認'}｜${r.progress||'待補'}`).join('\n')||'尚無關聯待辦'}`;
+  return `週四全公司業務週會｜WS 單位提報草稿\n來源週次：${key}；暫定示範格式\n草稿・尚未送出；請主管人工檢查\n未帶入內部討論與決議原文；示範遮蔽非正式防護\n\n${rr.map((r,i)=>`${i+1}. ${r.title}\n本週重點進度：${r.progress||'待補'}${r.caseId?'；案件最新狀態：'+r.caseStatus:''}\n風險／待協調：待人工補充\n需主管決策：待人工補充\n下週計畫：${r.task?.title||'待人工補充'}\n來源：${r.caseName} / 議題 ${r.id}\n資料更新：${r.updatedAt}`).join('\n\n')||'尚未選取可提報議題'}`;
+ }
+ function generate(s,key,kind,replace=false){const w=week(s,key),old=w.drafts[kind];if(old?.manual&&!replace)throw Error('人工修改尚未處理');if(old&&replace)w.backups.push({...clone(old),kind,savedAt:now()});const rr=rows(s,key,kind);return w.drafts[kind]={id:uid(s,'draft'),kind,revision:(old?.revision||0)+1,text:textFor(s,key,kind,rr),rows:rr,fingerprint:signature(s,key,kind),manual:false,createdAt:now()};}
+ function stale(s,key,kind){const d=week(s,key).drafts[kind];return !!d&&d.fingerprint!==signature(s,key,kind);}
+ function confirm(s,key,kind){const w=week(s,key),d=w.drafts[kind];if(!d)throw Error('請先產生草稿');if(stale(s,key,kind))throw Error('來源有更新，請先整理草稿');const v={...clone(d),id:uid(s,'version'),confirmedAt:now(),number:w.versions[kind].length+1};w.versions[kind].push(v);if(kind==='minutes')w.status='紀錄已確認';return v;}
+ function toDossier(s,key,versionId,caseId,ids){const v=week(s,key).versions.minutes.find(x=>x.id===versionId),c=s.cases[caseId];if(!v||!c)throw Error('請選擇已確認紀錄與案件');let n=0;for(const r of v.rows.filter(x=>x.caseId===caseId&&ids.includes(x.id))){const id='meeting-'+v.id+'-'+r.id;if(c.docs.some(d=>d.id===id))continue;const text=minuteRow(r);c.docs.push({id,title:key+' 週會 · '+r.title,filename:'週會紀錄片段（示例）.txt',format:'NOTE',event:'06 週會紀錄',date:key,status:'紀錄 v'+v.number+' 關聯片段',kinds:Array.from({length:Math.max(1,Math.ceil(text.length/600))},()=> 'meeting'),text,sourceVersion:v.id});DemoModel.remember(c,'＋ 納入週會紀錄片段');c.order.push(id);n++;}return n;}
+ return {init,week,topics,addTopic,carry,priorUpdate,updateTask,taskFromTopic,rows,minuteRow,generate,stale,signature,confirm,toDossier,now,clone};
+})();
+
+</script>
+<script id="msg-subject">
+// Offline, subject-only MSG reader. No body/attachment rendering or dependencies.
+// MS-CFB allocation + root MS-OXMSG PidTagSubject stream (0037/001F or 001E).
+globalThis.MsgSubject=(()=>{
+ const FREE=0xffffffff,END=0xfffffffe,MAX=25*1024*1024;
+ function read(input){
+  const bytes=input instanceof Uint8Array?input:new Uint8Array(input);
+  const fail=()=>{throw Error('無法辨識 .msg 結構，請手動填寫標題。');};
+  if(bytes.length<512||bytes.length>MAX||[0xd0,0xcf,0x11,0xe0,0xa1,0xb1,0x1a,0xe1].some((v,i)=>bytes[i]!==v))throw Error('不是支援的 .msg 格式（單檔上限 25 MB），請手動填寫標題。');
+  const v=new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength),u16=o=>v.getUint16(o,true),u32=o=>v.getUint32(o,true);
+  const version=u16(26),shift=u16(30);if(u16(28)!==0xfffe||!((version===3&&shift===9)||(version===4&&shift===12))||u16(32)!==6||u32(56)!==4096)fail();
+  const S=2**shift,count=Math.floor(bytes.length/S)-1;if(count<1||bytes.length%S)fail();
+  const sector=n=>{if(!Number.isInteger(n)||n<0||n>=count)fail();return bytes.subarray((n+1)*S,(n+2)*S);};
+  const words=b=>{const d=new DataView(b.buffer,b.byteOffset,b.byteLength);return Array.from({length:b.length/4},(_,i)=>d.getUint32(i*4,true));};
+  const fatIds=[];for(let i=0;i<109;i++){const n=u32(76+4*i);if(n!==FREE)fatIds.push(n);}
+  const extra=u32(72);if(extra>count)fail();let next=u32(68);const seenDif=new Set();
+  for(let i=0;i<extra;i++){if(seenDif.has(next))fail();seenDif.add(next);const a=words(sector(next));for(const n of a.slice(0,-1))if(n!==FREE)fatIds.push(n);next=a.at(-1);}
+  const fatCount=u32(44);if(!fatCount||fatCount>count||fatIds.length<fatCount)fail();const used=fatIds.slice(0,fatCount);if(new Set(used).size!==used.length)fail();const fat=used.flatMap(n=>words(sector(n)));
+  function chain(start,table,getChunk,maxCount,maxBytes=MAX){if(start===END)return new Uint8Array();const seen=new Set(),chunks=[];let n=start,total=0;while(n!==END){if(!Number.isInteger(n)||n<0||n>=table.length||seen.has(n)||seen.size>=maxCount)fail();seen.add(n);const b=getChunk(n);total+=b.length;if(total>maxBytes)fail();chunks.push(b);n=table[n];}const all=new Uint8Array(total);let at=0;for(const b of chunks){all.set(b,at);at+=b.length;}return all;}
+  const directory=chain(u32(48),fat,sector,count),d=new DataView(directory.buffer),entries=[];
+  for(let at=0;at+128<=directory.length;at+=128){const type=d.getUint8(at+66),len=d.getUint16(at+64,true);if(type&&(!(len>=2&&len<=64)||len%2))fail();entries.push({name:type?new TextDecoder('utf-16le').decode(directory.subarray(at,at+len-2)):'',type,left:d.getUint32(at+68,true),right:d.getUint32(at+72,true),child:d.getUint32(at+76,true),start:d.getUint32(at+116,true),size:d.getUint32(at+120,true)+(version===4?d.getUint32(at+124,true)*4294967296:0)});}
+  const root=entries[0];if(!root||root.type!==5||root.size>MAX)fail();
+  // Only direct children of root: never import the subject of an attached email.
+  const top=[],pending=[root.child],seenNodes=new Set();while(pending.length){const id=pending.pop();if(id===FREE)continue;if(id>=entries.length||seenNodes.has(id))fail();seenNodes.add(id);const e=entries[id];if(!e.type)fail();top.push(e);pending.push(e.left,e.right);}
+  let miniFat=null,mini=null;
+  function stream(e,limit){if(!e||e.type!==2||e.size>limit||e.size>MAX)fail();if(!e.size)return new Uint8Array();let data;
+   if(e.size<4096){if(!miniFat){const raw=chain(u32(60),fat,sector,count);if(raw.length!==u32(64)*S)fail();miniFat=words(raw);const full=chain(root.start,fat,sector,count);if(full.length<root.size)fail();mini=full.subarray(0,root.size);}data=chain(e.start,miniFat,n=>{const at=n*64;if(at+64>mini.length)fail();return mini.subarray(at,at+64);},Math.ceil(mini.length/64),limit+64);
+   }else data=chain(e.start,fat,sector,count,limit+S);
+   if(data.length<e.size)fail();return data.subarray(0,e.size);
+  }
+  const find=name=>top.find(e=>e.type===2&&e.name.toLowerCase()===name.toLowerCase());
+  let subject,encoding;const unicode=find('__substg1.0_0037001F');
+  if(unicode){const raw=stream(unicode,65536);if(raw.length%2)fail();try{subject=new TextDecoder('utf-16le',{fatal:true}).decode(raw);encoding='Unicode';}catch{throw Error('主旨 Unicode 編碼無法讀取，請手動填寫標題。');}}
+  else {const ansi=find('__substg1.0_0037001E');if(!ansi)throw Error('找不到這封信件的主旨，請手動填寫標題。');const raw=stream(ansi,65536),props=find('__properties_version1.0');let cp=null;
+   if(props){const b=stream(props,1024*1024),p=new DataView(b.buffer,b.byteOffset,b.byteLength);for(let at=32;at+16<=b.length;at+=16){const tag=p.getUint32(at,true);if(tag===0x3ffd0003){cp=p.getUint32(at+8,true);break;}if(tag===0x3fde0003)cp=p.getUint32(at+8,true);}}
+   const enc={65001:'utf-8',950:'big5',936:'gbk',932:'shift_jis',949:'euc-kr',20127:'windows-1252',1250:'windows-1250',1251:'windows-1251',1252:'windows-1252',1253:'windows-1253',1254:'windows-1254',1255:'windows-1255',1256:'windows-1256',1257:'windows-1257',1258:'windows-1258'};
+   encoding=enc[cp]||(!cp&&raw.every(n=>n<128)?'windows-1252':null);if(!encoding)throw Error('此 .msg 的舊式主旨編碼尚不支援，請手動填寫標題。');try{subject=new TextDecoder(encoding,{fatal:true}).decode(raw);}catch{throw Error('主旨編碼無法讀取，請手動填寫標題。');}
+  }
+  subject=subject.split('\0')[0].replace(/[\u0001-\u0008\u000b\u000c\u000e-\u001f]/g,'').trim();if(!subject)throw Error('信件主旨為空白，請手動填寫標題。');return {subject,encoding};
+ }
+ return {read,maxBytes:MAX};
+})();
+
+</script>
 <script id="demo-ui">
 (()=>{
 'use strict';
-const M=DemoModel,$=id=>document.getElementById(id),STORE='ws-pages-poc-demo-01',FEEDBACK='ws-pages-poc-feedback-01';
+const M=DemoModel,$=id=>document.getElementById(id),STORE='ws-pages-weekly-demo-v2-20260917',FEEDBACK='ws-pages-poc-feedback-01';
 let state=M.createState(),storageOK=true,toastTimer,dragId=null,lastFocus=null;
-const ui={tab:'dossier',query:'',poolFilter:'all',output:'draft',page:1,guide:-1,feedbackType:'操作流程',feedbackContext:null,hidePreview:false};
+const ui={tab:'meeting',query:'',poolFilter:'all',output:'draft',page:1,guide:-1,feedbackType:'操作流程',feedbackContext:null,hidePreview:false};
 const F=DemoFeedback,BOARD='ws-pages-shared-board-01',DRAFT='ws-pages-feedback-draft-01';
 const shared={dir:null,rows:[],readAt:'',busy:false,message:'',view:'write',draft:{reviewerName:'',opinion:'',difficulty:''}};
 try{const cache=JSON.parse(localStorage.getItem(BOARD)||'null');if(cache?.folder===F.folderName&&Array.isArray(cache.rows)){shared.rows=cache.rows.map(F.record);shared.readAt=String(cache.readAt||'');}}catch{}
@@ -152,26 +524,60 @@ const tabNames={overview:'案件總覽',documents:'文件與履歷',dossier:'卷
 const paths={folder:'M3 6h6l2 2h10v11H3z M3 6V4h6l2 2',book:'M4 3h15v18H4z M8 3v18 M11 7h5 M11 11h5',grid:'M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z',message:'M21 11a8 8 0 0 1-8 8H6l-4 3V11a9 9 0 0 1 19 0z M7 10h10 M7 14h6',arrow:'M4 12h16 M14 6l6 6-6 6',plus:'M12 4v16 M4 12h16',check:'M5 12l4 4L19 6',eye:'M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0',search:'M10 3a7 7 0 1 1 0 14 7 7 0 0 1 0-14 M15 15l6 6',up:'M6 14l6-6 6 6',down:'M6 10l6 6 6-6',minus:'M5 12h14',undo:'M3 9h11a6 6 0 0 1 0 12 M3 9l5-5 M3 9l5 5',paper:'M6 2h8l5 5v15H6z M14 2v6h5 M9 12h7 M9 16h7',expand:'M3 9V3h6 M15 3h6v6 M21 15v6h-6 M9 21H3v-6',print:'M6 9V3h12v6 M6 18H3V9h18v9h-3 M6 14h12v8H6z M17 12h1',save:'M4 3h14l3 3v15H3V3z M7 3v6h10V3 M7 21v-8h10v8',clock:'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18 M12 7v6l4 2',sun:'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M12 1v3 M12 20v3 M1 12h3 M20 12h3 M4 4l2 2 M18 18l2 2 M4 20l2-2 M18 6l2-2',moon:'M20 15A9 9 0 0 1 9 4a9 9 0 1 0 11 11z',info:'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18 M12 11v6 M12 7h.01',download:'M12 3v12 M7 10l5 5 5-5 M4 16v5h16v-5',grip:'M8 5h.01 M16 5h.01 M8 12h.01 M16 12h.01 M8 19h.01 M16 19h.01',flag:'M5 21V3h13l-3 5 3 5H5',users:'M9 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6 M3 21v-4a6 6 0 0 1 12 0v4 M17 5a3 3 0 0 1 0 6 M18 14a5 5 0 0 1 3 5v2',play:'M8 4l12 8-12 8z'};
 const icon=n=>`<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="${paths[n]||paths.paper}"/></svg>`;
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const btn=(action,body,extra='',cls='')=>`<button class="${cls}" data-action="${action}" ${extra}>${body}</button>`;
+const btn=(action,body,extra='',cls='')=>`<button class="${glassClasses(action,cls)}" data-action="${action}" ${extra}>${body}</button>`;
 const current=()=>state.cases[state.caseId],saved=()=>current().snapshots.find(s=>s.id===ui.output),readonly=()=>ui.output!=='draft';
 const outputPages=()=>readonly()?(saved()?.pages||M.pages(current())):M.pages(current());
 const outputOrder=()=>readonly()?(saved()?.order||current().order):current().order;
+/* GLASS ADAPTER START */
+// Uses the existing prefs store. Never creates a second theme or feedback store.
+let glassControl=null,glassReturnFocus=null;
+function glassClasses(action,cls=''){
+ if(['prev-page','next-page','toc'].includes(action))return cls+' lg-button'+(action==='toc'?' glass-page-text':'');
+ const quiet=['scenario','toggle-preview','files','sort','undo','snapshot','expand','print','case-info','new-case','guide-prev','guide-next','guide-close','prev-week','next-week','previous-topic','next-topic','reference','general','email','carry','schedule','start','stop','case-open','case-progress','go-output','task-edit','open','glass-settings'];
+ return cls+((cls.split(' ').includes('primary')||quiet.includes(action))?' lg-action lg-surface lg-quiet'+(cls.split(' ').includes('primary')?' lg-action--primary':''):'');
+}
+function glassSettings(){return {density:state.prefs.glassDensity??45,theme:state.prefs.mode,background:state.prefs.glassBackground||'plain'};}
+function syncGlassAppearance(){
+ const settings=glassSettings();LiquidGlassControls.apply(document.body,settings);
+ if(glassControl&&JSON.stringify(glassControl.getSettings())!==JSON.stringify(settings))glassControl.setSettings(settings);
+}
+function initGlass(){
+ const panel=$('glass-panel'),form=$('glass-controls');
+ glassControl=LiquidGlassControls.mount(form,document.body,{settings:glassSettings(),onChange(settings){
+  const themeChanged=state.prefs.mode!==settings.theme;
+  state.prefs.glassDensity=settings.density;state.prefs.glassBackground=settings.background;state.prefs.mode=settings.theme;
+  if(themeChanged)appearance();persist();
+ }});
+ form.addEventListener('submit',e=>e.preventDefault());
+ document.addEventListener('click',e=>{
+  const trigger=e.target.closest('[data-glass-open]');
+  if(trigger){glassReturnFocus=trigger;syncGlassAppearance();panel.showModal();trigger.setAttribute('aria-expanded','true');}
+  if(e.target.closest('[data-glass-close]'))panel.close();
+  if(e.target.closest('[data-lg-reset]')){glassControl.setSettings({density:45,theme:'light',background:'plain'});}
+ });
+ // Native Escape closes this panel without also ending the weekly projection.
+ panel.addEventListener('keydown',e=>{if(e.key==='Escape')e.stopPropagation();});
+ panel.addEventListener('close',()=>{document.querySelectorAll('[data-glass-open]').forEach(e=>e.setAttribute('aria-expanded','false'));glassReturnFocus?.focus();});
+}
+
+/* GLASS ADAPTER END */
 function readStorage(){try{const raw=JSON.parse(localStorage.getItem(STORE)||'null');if(raw?.schema===1&&raw.cases?.frdc&&raw.cases?.cmw&&Array.isArray(raw.cases.frdc.docs)&&raw.cases[raw.caseId])state=raw;const feedback=JSON.parse(localStorage.getItem(FEEDBACK)||'[]');if(Array.isArray(feedback))state.feedback=feedback;}catch{storageOK=false;state=M.createState();}if(!names[state.prefs?.theme])state.prefs={theme:'mono',mode:'light'};if(!['light','dark'].includes(state.prefs.mode))state.prefs.mode='light';}
 function persist(){try{localStorage.setItem(FEEDBACK,JSON.stringify(state.feedback));localStorage.setItem(STORE,JSON.stringify(state));}catch{storageOK=false;}}
 function toast(text){clearTimeout(toastTimer);$('toast').textContent=text;$('toast').classList.add('visible');toastTimer=setTimeout(()=>$('toast').classList.remove('visible'),3500);}
-function appearance(){document.documentElement.dataset.theme=state.prefs.theme;document.documentElement.dataset.mode=state.prefs.mode;$('themes').innerHTML=Object.entries(names).map(([key,name])=>btn('theme',`<span class="swatch" style="background:${{mono:'#8c3d3d',graphite:'#657d8c',geist:'#222',carbon:'#0f62fe'}[key]}"></span>${name}`,`data-theme="${key}" aria-pressed="${state.prefs.theme===key}"`,state.prefs.theme===key?'active':'')).join('');$('modes').innerHTML=['light','dark'].map(v=>btn('mode',icon(v==='light'?'sun':'moon')+(v==='light'?'淺色':'深色'),`data-mode="${v}" aria-pressed="${state.prefs.mode===v}"`,state.prefs.mode===v?'active':'')).join('');}
+function appearance(){syncGlassAppearance();document.documentElement.dataset.theme=state.prefs.theme;document.documentElement.dataset.mode=state.prefs.mode;$('themes').innerHTML=Object.entries(names).map(([key,name])=>btn('theme',`<span class="swatch" style="background:${{mono:'#8c3d3d',graphite:'#657d8c',geist:'#222',carbon:'#0f62fe'}[key]}"></span>${name}`,`data-theme="${key}" aria-pressed="${state.prefs.theme===key}"`,state.prefs.theme===key?'active':'')).join('');$('modes').innerHTML=['light','dark'].map(v=>btn('mode',icon(v==='light'?'sun':'moon')+(v==='light'?'淺色':'深色'),`data-mode="${v}" aria-pressed="${state.prefs.mode===v}"`,state.prefs.mode===v?'active':'')).join('');}
 function sidebarLayout(){const collapsed=state.prefs.sidebarCollapsed===true;document.documentElement.dataset.sidebar=collapsed?'collapsed':'expanded';const button=$('sidebar-toggle'),label=collapsed?'展開側邊欄':'收合側邊欄';button.setAttribute('aria-expanded',String(!collapsed));button.setAttribute('aria-label',label);button.title=label;button.innerHTML=`<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="${collapsed?'M9 6l6 6-6 6':'M15 6l-6 6 6 6'}"/></svg>`;}
-function renderSidebar(){const c=current();$('case-shortcuts').innerHTML=Object.values(state.cases).map(x=>`<button class="case-shortcut ${ui.tab!=='home'&&c.id===x.id?'active':''}" data-action="case" data-id="${esc(x.id)}" title="${esc(x.customer)} · ${esc(x.name)}" aria-label="${esc(x.customer)} · ${esc(x.name)}"><span class="case-dot"></span><span class="case-icon" aria-hidden="true">${icon(x.id==='cmw'?'users':'folder')}</span><span class="case-copy"><strong>${esc(x.customer)} ${x.id==='frdc'?'DEMO-001':x.id==='cmw'?'9/1 來訪':'示範案件'}</strong><small>${esc(x.type)}</small></span></button>`).join('');$('nav-home').innerHTML=icon('grid')+'<span class="side-label">案件一覽</span>';$('nav-dossier').innerHTML=icon('book')+'<span class="side-label">卷宗編排</span>';$('nav-home').classList.toggle('active',ui.tab==='home');$('nav-dossier').classList.toggle('active',ui.tab==='dossier');$('guide-button').innerHTML=icon('play')+'操作導覽';$('feedback-button').innerHTML=icon('message')+`留下意見 <span style="opacity:.65">${state.feedback.length||''}</span>`;sidebarLayout();}
+function renderSidebar(){const c=current();$('case-shortcuts').innerHTML=Object.values(state.cases).map(x=>`<button class="case-shortcut ${ui.tab!=='home'&&ui.tab!=='meeting'&&c.id===x.id?'active':''}" data-action="case" data-id="${esc(x.id)}" title="${esc(x.customer)} · ${esc(x.name)}" aria-label="${esc(x.customer)} · ${esc(x.name)}"><span class="case-dot"></span><span class="case-icon" aria-hidden="true">${icon(x.id==='cmw'?'users':'folder')}</span><span class="case-copy"><strong>${esc(x.customer)} ${x.id==='frdc'?'DEMO-001':x.id==='cmw'?'9/1 來訪':'示範案件'}</strong><small>${esc(x.type)}</small></span></button>`).join('');$('nav-home').innerHTML=icon('grid')+'<span class="side-label">案件一覽</span>';$('nav-dossier').innerHTML=icon('book')+'<span class="side-label">卷宗編排</span>';$('nav-home').classList.toggle('active',ui.tab==='home');$('nav-dossier').classList.toggle('active',ui.tab==='dossier');$('guide-button').innerHTML=icon('play')+'操作導覽';$('feedback-button').innerHTML=icon('message')+`留下意見 <span style="opacity:.65">${state.feedback.length||''}</span>`;sidebarLayout();}
 function renderHeader(){const c=current();if(ui.tab==='home'){$('case-head').innerHTML='';return;}const has=c.docs.some(d=>d.id===(c.id==='cmw'?'minutes':'pack'));$('case-head').innerHTML=`<div class="breadcrumb"><span>工作案例</span><span>›</span><span>${esc(c.customer)}</span><span class="mono" style="margin-left:auto">${esc(c.code)}</span></div><div class="case-title-row"><div><h1>${esc(c.name)}</h1><p class="subtitle">${esc(c.id==='frdc'?'兩輪報價，一條清楚的脈絡。下一步：追加紙箱包裝。':c.id==='cmw'?'從來訪準備到會後整理，讓資料自然形成一份卷宗。':'用一個簡單案例，試試資料與卷宗的操作方式。')}</p><div class="case-status"><span class="pill good">${icon('check')}${esc(c.type)}</span><span class="pill">${icon('clock')}${esc(c.period)}</span><span class="pill warn">${esc(c.status)}</span></div></div><div class="case-title-actions">${btn('scenario',icon('plus')+(c.id==='cmw'?'加入會後紀錄示例':'加入包裝更新草稿'),has||!['frdc','cmw'].includes(c.id)?'disabled':'','small')}${btn('case-info',icon('info'),'aria-label="案例與示範說明"','icon-btn')}</div></div><nav class="tabs" aria-label="案件檢視">${Object.entries(tabNames).filter(([k])=>k!=='home').map(([key,name])=>btn('nav',name,`data-tab="${key}" aria-current="${ui.tab===key?'page':'false'}"`,ui.tab===key?'active':'')).join('')}</nav>`;}
 function docCard(d,wide=false){const included=current().order.includes(d.id);const status=d.isNew?'<span class="pill accent">NEW</span>':`<span class="doc-date">${esc(d.date)}</span>`;return `<article class="doc-card ${d.isNew?'is-new':''}" draggable="${!readonly()}" data-drag-id="${esc(d.id)}"><div class="doc-top"><span class="format">${esc(d.format)}</span>${status}</div><h4>${esc(d.title)}</h4><div class="file-name" title="${esc(d.filename)}">${esc(d.filename)}</div><div class="card-bottom"><span class="pill ${included?'good':d.isNew?'warn':''}">${included?'✓ 已納入':d.isNew?'尚未納入':esc(d.status)}</span><div class="card-actions">${btn('document',icon('eye'),`data-id="${esc(d.id)}" aria-label="查看 ${esc(d.title)}" title="查看示例內容"`,'icon-btn ghost')}${btn(included?'exclude':'include',icon(included?'minus':'plus'),`data-id="${esc(d.id)}" ${readonly()?'disabled':''} aria-label="${included?'移出本次卷宗':'納入卷宗'} ${esc(d.title)}" title="${included?'移出本次卷宗':'納入卷宗'}"`,'icon-btn')}</div></div>${wide?`<p class="muted" style="font-size:10px;margin-top:10px">${esc(d.event)} · ${d.kinds.length} 頁示例</p>`:''}</article>`;}
 function filteredDocs(){return current().docs.filter(d=>(ui.poolFilter!=='pending'||!current().order.includes(d.id))&&(!ui.query||[d.title,d.filename,d.event].join(' ').toLowerCase().includes(ui.query.toLowerCase())));}
 function poolContent(){const groups={};filteredDocs().forEach(d=>(groups[d.event]??=[]).push(d));return Object.entries(groups).map(([event,docs])=>`<div class="group-label">${esc(event)}</div>${docs.map(d=>docCard(d)).join('')}`).join('')||'<div class="empty">沒有符合的資料</div>';}
 function pageRange(id){const p=outputPages().filter(p=>p.docId===id);return p.length?`P.${p[0].number}${p.length>1?'–'+p.at(-1).number:''}`:'';}
 function renderOrder(){const c=current(),order=outputOrder();return `<div class="generated-row">${icon('paper')}封面<span class="page-range mono">P.1</span></div><div class="generated-row">${icon('book')}目錄・案件摘要<span class="page-range mono">P.2–${outputPages().find(p=>p.kind==='summary').number}</span></div><div class="generated-divider"></div>${order.map((id,i)=>{const d=c.docs.find(x=>x.id===id);if(!d)return '';return `<article class="order-card ${d.kinds[0]==='memo'?'memo':''}" draggable="${!readonly()}" data-order-id="${esc(id)}" data-drag-id="${esc(id)}"><span class="grip">${icon('grip')}</span><div class="grow"><h4>${esc(d.title)}</h4><div class="order-meta"><span class="mono">${pageRange(id)}</span> · ${esc(d.status)}</div></div><div class="order-actions">${btn('page-doc',icon('eye'),`data-id="${esc(id)}" title="在右側預覽" aria-label="預覽 ${esc(d.title)}"`)}${btn('up',icon('up'),`data-id="${esc(id)}" ${readonly()||i===0?'disabled':''} aria-label="上移 ${esc(d.title)}"`)}${btn('down',icon('down'),`data-id="${esc(id)}" ${readonly()||i===order.length-1?'disabled':''} aria-label="下移 ${esc(d.title)}"`)}${btn('exclude',icon('minus'),`data-id="${esc(id)}" ${readonly()?'disabled':''} aria-label="移出本次卷宗 ${esc(d.title)}"`)}</div></article>`;}).join('')}${!order.length?'<div class="empty">把左側資料拖到這裡<br>或按卡片上的 ＋ 納入卷宗</div>':''}${btn('handwriting',icon('plus')+'插入手寫補充頁',readonly()?'disabled':'','add-page')}`;}
-function renderBuilder(){const c=current(),pg=outputPages();ui.page=Math.min(Math.max(1,ui.page),pg.length);return `<div class="workspace-intro"><div class="row">${icon('book')}<strong>編好這次要帶走的資料</strong><span class="muted">${readonly()?'歷史輸出版・唯讀':'從左側挑選，拖動中間卡片調整順序。'}</span></div>${btn('toggle-preview',icon(ui.hidePreview?'eye':'expand')+(ui.hidePreview?'顯示預覽':'收合預覽'),'','small ghost')}</div><div class="builder-grid"><section class="panel"><div class="panel-heading"><h3><span class="step-number">01</span> 案件資料池</h3><span class="badge-count">${c.docs.length}</span></div><p class="panel-subtitle">資料保留在案件裡，按需放進卷宗。</p><div class="search-wrap">${icon('search')}<input id="pool-search" aria-label="搜尋案件資料" placeholder="搜尋文件、事件…" value="${esc(ui.query)}"></div><div class="panel-controls">${btn('filter','全部資料','data-filter="all" aria-pressed="'+(ui.poolFilter==='all')+'"','small filter-btn '+(ui.poolFilter==='all'?'active':''))}${btn('filter','尚未納入','data-filter="pending" aria-pressed="'+(ui.poolFilter==='pending')+'"','small filter-btn '+(ui.poolFilter==='pending'?'active':''))}</div><div class="pool-scroll" id="pool-list">${poolContent()}</div><div class="panel-footer"><span>示例文件・可拖拉</span>${btn('files',icon('plus')+'選取本機檔案',readonly()?'disabled':'','small ghost')}</div></section><section class="panel"><div class="panel-heading"><h3><span class="step-number">02</span> ${readonly()?'已保存編排':'本次卷宗'}</h3><span class="pill ${readonly()?'':'accent'}">${readonly()?'唯讀':'草稿'}</span></div><p class="panel-subtitle">${readonly()?'查看當時保存的內容與排列。':'移出卷宗不會刪除原始資料。'}</p><div class="panel-controls">${btn('sort',icon('clock')+'依事件排序',readonly()?'disabled':'','small')}${btn('undo',icon('undo'),'aria-label="復原上一步編排" title="復原上一步編排" '+(readonly()||!c.undo.length?'disabled':''),'small')}${readonly()?btn('draft','回到草稿','','small primary'):''}</div><div class="order-scroll" id="order-list">${renderOrder()}</div><div class="changes">${c.changes.length?`<strong>${esc(c.changes[0])}</strong>`:'拖動卡片，看看右側的變化。'}</div><div class="panel-footer"><span>${outputOrder().length} 項資料 · <strong>${pg.length} 頁</strong></span>${btn('snapshot',icon('save')+'保存輸出版',readonly()?'disabled':'','small primary')}</div></section><section class="panel preview-panel"><div class="panel-heading"><h3><span class="step-number">03</span> 紙本預覽</h3>${btn('expand',icon('expand'),'aria-label="放大卷宗預覽"','icon-btn ghost')}</div><div class="preview-toolbar"><select id="output-select" aria-label="選擇卷宗草稿或輸出版"><option value="draft">目前草稿 · 即時更新</option>${c.snapshots.map(s=>`<option value="${s.id}" ${ui.output===s.id?'selected':''}>${esc(s.label)} · 已保存</option>`).join('')}</select>${btn('print',icon('print'),'aria-label="列印目前卷宗" title="列印目前顯示的卷宗"','icon-btn')}</div><div class="paper-viewport" id="paper-viewport"><div style="width:100%;display:flex;justify-content:center">${paper(pg[ui.page-1],true)}</div></div><div class="preview-bottom"><span class="mono">A4 · ${ui.page} / ${pg.length} 頁</span><div class="row" style="gap:4px">${btn('prev-page',icon('up'),`aria-label="上一頁" ${ui.page===1?'disabled':''}`,'icon-btn ghost')}${btn('next-page',icon('down'),`aria-label="下一頁" ${ui.page===pg.length?'disabled':''}`,'icon-btn ghost')}${btn('toc','目錄','','small ghost')}</div></div><div class="panel-footer"><span>示例頁重編・可放大閱讀</span><span>${readonly()?'已保存':'尚未保存為輸出版'}</span></div></section></div>`;}
+function renderBuilder(){const c=current(),pg=outputPages();ui.page=Math.min(Math.max(1,ui.page),pg.length);return `<div class="workspace-intro"><div class="row">${icon('book')}<strong>編好這次要帶走的資料</strong><span class="muted">${readonly()?'歷史輸出版・唯讀':'從左側挑選，拖動中間卡片調整順序。'}</span></div>${btn('toggle-preview',icon(ui.hidePreview?'eye':'expand')+(ui.hidePreview?'顯示預覽':'收合預覽'),'','small ghost')}</div><div class="builder-grid"><section class="panel"><div class="panel-heading"><h3><span class="step-number">01</span> 案件資料池</h3><span class="badge-count">${c.docs.length}</span></div><p class="panel-subtitle">資料保留在案件裡，按需放進卷宗。</p><div class="search-wrap">${icon('search')}<input id="pool-search" aria-label="搜尋案件資料" placeholder="搜尋文件、事件…" value="${esc(ui.query)}"></div><div class="panel-controls">${btn('filter','全部資料','data-filter="all" aria-pressed="'+(ui.poolFilter==='all')+'"','small filter-btn '+(ui.poolFilter==='all'?'active':''))}${btn('filter','尚未納入','data-filter="pending" aria-pressed="'+(ui.poolFilter==='pending')+'"','small filter-btn '+(ui.poolFilter==='pending'?'active':''))}</div><div class="pool-scroll" id="pool-list">${poolContent()}</div><div class="panel-footer"><span>示例文件・可拖拉</span>${btn('files',icon('plus')+'選取本機檔案',readonly()?'disabled':'','small ghost')}</div></section><section class="panel"><div class="panel-heading"><h3><span class="step-number">02</span> ${readonly()?'已保存編排':'本次卷宗'}</h3><span class="pill ${readonly()?'':'accent'}">${readonly()?'唯讀':'草稿'}</span></div><p class="panel-subtitle">${readonly()?'查看當時保存的內容與排列。':'移出卷宗不會刪除原始資料。'}</p><div class="panel-controls">${btn('sort',icon('clock')+'依事件排序',readonly()?'disabled':'','small')}${btn('undo',icon('undo'),'aria-label="復原上一步編排" title="復原上一步編排" '+(readonly()||!c.undo.length?'disabled':''),'small')}${readonly()?btn('draft','回到草稿','','small primary'):''}</div><div class="order-scroll" id="order-list">${renderOrder()}</div><div class="changes">${c.changes.length?`<strong>${esc(c.changes[0])}</strong>`:'拖動卡片，看看右側的變化。'}</div><div class="panel-footer"><span>${outputOrder().length} 項資料 · <strong>${pg.length} 頁</strong></span>${btn('snapshot',icon('save')+'保存輸出版',readonly()?'disabled':'','small primary')}</div></section><section class="panel preview-panel"><div class="panel-heading"><h3><span class="step-number">03</span> 紙本預覽</h3>${btn('expand',icon('expand'),'aria-label="放大卷宗預覽"','icon-btn ghost')}</div><div class="preview-toolbar"><select id="output-select" aria-label="選擇卷宗草稿或輸出版"><option value="draft">目前草稿 · 即時更新</option>${c.snapshots.map(s=>`<option value="${s.id}" ${ui.output===s.id?'selected':''}>${esc(s.label)} · 已保存</option>`).join('')}</select>${btn('print',icon('print'),'aria-label="列印目前卷宗" title="列印目前顯示的卷宗"','icon-btn')}</div><div class="paper-viewport" id="paper-viewport"><div style="width:100%;display:flex;justify-content:center">${paper(pg[ui.page-1],true)}</div></div><div class="preview-bottom"><span class="mono">A4 · ${ui.page} / ${pg.length} 頁</span><div class="glass-pagination lg-group lg-surface lg-quiet" role="group" aria-label="卷宗翻頁">${btn('prev-page',icon('up'),`aria-label="上一頁" ${ui.page===1?'disabled':''}`,'icon-btn ghost')}${btn('next-page',icon('down'),`aria-label="下一頁" ${ui.page===pg.length?'disabled':''}`,'icon-btn ghost')}${btn('toc','目錄','','small ghost')}</div></div><div class="panel-footer"><span>示例頁重編・可放大閱讀</span><span>${readonly()?'已保存':'尚未保存為輸出版'}</span></div></section></div>`;}
 function wheel(){return `<svg class="wheel-graphic" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.4" aria-label="輪圈造型示意圖"><circle cx="100" cy="100" r="90"/><circle cx="100" cy="100" r="78"/><circle cx="100" cy="100" r="24"/><circle cx="100" cy="100" r="12"/>${Array.from({length:5},(_,i)=>`<path transform="rotate(${i*72} 100 100)" d="M91 77L76 26 89 23 107 74M109 77L125 28 138 35 123 92"/>`).join('')}<path d="M0 100h200M100 0v200" stroke-dasharray="3 6" opacity=".2"/></svg>`;}
 function table(head,rows){return `<table><thead><tr>${head.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(v=>`<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;}
 function paperBody(p){switch(p.kind){
+case 'meeting':return `<h2>${esc(p.title)}</h2><p class="paper-note">週會關聯片段・示範分頁估算，非真實附件頁數</p><p style="white-space:pre-wrap">${esc(p.text)}</p>`;
 case 'cover':return `<div class="cover-kicker">WS / CASE DOSSIER</div><h2>${esc(p.caseName)}</h2><div class="cover-rule"></div><p class="cover-sub">${p.caseId==='cmw'?'來訪準備・會議資料・會後整理':'報價履歷・條件確認・包裝變更'}</p><dl class="cover-info"><dt>客戶</dt><dd>${esc(p.customer)}</dd><dt>涵蓋期間</dt><dd>${esc(p.period)}</dd><dt>整理單位</dt><dd>Wheel Dept. WS 業務課</dd><dt>整理人</dt><dd>WS 同仁甲（示例）</dd><dt>整理日期</dt><dd>2026/09/08（示例）</dd><dt>資料性質</dt><dd>UI/UX 討論用・示例內容</dd></dl>`;
 case 'toc':return `<h2>卷宗目錄</h2><p><small>依本次納入項目與順序編排</small></p>${p.entries.map(e=>`<div class="paper-index-row"><span>${esc(e.title)}</span><span class="leaders"></span><span class="mono">${e.start}</span></div>`).join('')}<div class="paper-note">封面亦計入頁次。目錄與頁碼依本次示例頁組合更新。</div>`;
 case 'summary':return `<h2>案件摘要與履歷</h2><p style="white-space:pre-line">${esc(p.text)}</p>${p.stale?'<div class="paper-note">來源已有新增資料，這份摘要待重新確認。</div>':''}<h3>目前工作脈絡</h3>${table(['階段','目前狀態'],p.caseId==='cmw'?[['來訪準備','行程與歡迎資料'],['會議資料','簡報與背景參考'],['會後整理','合照版位、紀錄與補充']]:[['需求往來','保留需求與參考'],['報價履歷','已完成兩輪報價'],['下一步','追加紙箱包裝更新版待提出']])}<h3>手寫備註</h3><div class="memo-lines" style="height:22cqw"></div>`;
@@ -200,18 +606,18 @@ function renderDocuments(){return `<div class="workspace-intro"><div><strong>文
 function renderWeekly(){const c=current();const text=c.id==='frdc'?'DEMO-001 委託生產：已完成兩輪報價；捆包變更、追加紙箱包裝的更新版尚待提出。':'9/1 示例客戶 B 來訪：整理行程、會議資料及合照版位，確認本次卷宗要納入的內容。';return `<section class="panel content-panel" style="max-width:800px"><div class="row between section-heading"><h2>從案件帶出的短摘要</h2><span class="pill accent">示例內容</span></div><p class="overview-lead">${text}</p><div class="source-label">來源脈絡：${esc(c.name)} → ${c.id==='frdc'?'報價履歷與包裝更新待辦':'來訪準備與會後整理'}</div><div class="dialog-actions">${btn('nav',icon('arrow')+'回到案件來源','data-tab="overview"','small')}${btn('download-weekly',icon('download')+'下載摘要文字','','small primary')}</div></section>`;}
 function renderHome(){return `<div class="home-heading"><div class="eyebrow">YOUR WORK, IN CONTEXT</div><h1 style="margin-top:9px">從熟悉的工作開始</h1><p class="subtitle">選一個案例，試著把資料整理成想要的卷宗。</p></div><div class="row between" style="margin-bottom:15px"><strong>示範案例 <span class="muted">${Object.keys(state.cases).length}</span></strong>${btn('new-case',icon('plus')+'建立示範案件','','small')}</div><div class="home-grid">${Object.values(state.cases).map(c=>`<button class="home-card" data-action="case" data-id="${esc(c.id)}"><div class="row between"><div class="home-icon">${icon(c.id==='cmw'?'users':'folder')}</div><span class="pill">${esc(c.type)}</span></div><h2>${esc(c.name)}</h2><p>${esc(c.summary).replace(/\n/g,'<br>')}</p><div class="home-footer"><span>${c.docs.length} 項資料 · ${M.pages(c).length} 頁草稿</span><span class="row">進入案例 ${icon('arrow')}</span></div></button>`).join('')}</div><div class="attention-strip"><p>01 找到資料與來源</p><p>02 拖拉整理本次卷宗</p><p>03 告訴我們哪裡還不順手</p></div><div class="callout">這是一份可以自由操作的概念示範。完成後請留下意見，協助我們理解真正的工作習慣。</div>`;}
 function fitPaper(){const viewport=$('paper-viewport'),sheet=viewport?.querySelector('.paper-shell');if(sheet&&innerWidth>1150){const width=Math.max(100,Math.min(viewport.clientWidth-34,(viewport.clientHeight-30)*210/297));sheet.style.maxWidth=width+'px';}}
-function render(){const scrolls={};['pool-list','order-list','paper-viewport'].forEach(id=>{if($(id))scrolls[id]=$(id).scrollTop;});renderSidebar();renderHeader();$('stage').classList.toggle('no-preview',ui.hidePreview);$('stage').innerHTML=ui.tab==='home'?renderHome():ui.tab==='overview'?renderOverview():ui.tab==='documents'?renderDocuments():ui.tab==='weekly'?renderWeekly():renderBuilder();Object.entries(scrolls).forEach(([id,y])=>{if($(id))$(id).scrollTop=y;});fitPaper();renderGuide();}
+function render(){if(ui.tab==='meeting'){renderMeeting();return;}document.body.classList.remove('meeting-projection');const scrolls={};['pool-list','order-list','paper-viewport'].forEach(id=>{if($(id))scrolls[id]=$(id).scrollTop;});renderSidebar();renderHeader();$('stage').classList.toggle('no-preview',ui.hidePreview);$('stage').innerHTML=ui.tab==='home'?renderHome():ui.tab==='overview'?renderOverview():ui.tab==='documents'?renderDocuments():ui.tab==='weekly'?renderWeekly():renderBuilder();Object.entries(scrolls).forEach(([id,y])=>{if($(id))$(id).scrollTop=y;});fitPaper();renderGuide();meetingLinks();}
 function update(fn,message,focusDoc){const before=M.pages(current()).length;state=fn(state);persist();if(focusDoc){ui.output='draft';ui.page=M.pages(current()).find(p=>p.docId===focusDoc)?.number||1;}render();const after=M.pages(current()).length;toast(message+(before!==after?` · ${before} → ${after} 頁，目錄已更新`:''));}
 function openDialog(title,body,large=false){lastFocus=document.activeElement;$('dialog').classList.toggle('preview-dialog',large);$('dialog-title').textContent=title;$('dialog-body').innerHTML=body;if(!$('dialog').open)$('dialog').showModal();}
 function closeDialog(){$('dialog').close();if(lastFocus?.isConnected)lastFocus.focus();}
-function showDocument(id){const c=current(),d=c.docs.find(x=>x.id===id);if(!d)return;const p={kind:d.kinds[0],title:d.title,caseName:c.name,customer:c.customer,caseId:c.id,status:d.status,filename:d.filename,parts:d.kinds.length};openDialog(d.title,`<div class="row wrap" style="margin-bottom:14px"><span class="format">${esc(d.format)}</span><span class="pill">${esc(d.status)}</span><span class="muted">${d.kinds.length} 頁示例</span></div><div class="source-label">${esc(d.filename)}<br>所屬脈絡：${esc(d.event)}${d.size!==undefined?'<br>檔案大小：'+Math.ceil(d.size/1024)+' KB；內容未保存':''}</div><div style="margin-top:18px">${paper(p)}</div><div class="dialog-actions">${btn('close','返回')}${btn('nav-source','查看案件脈絡','data-id="'+esc(id)+'"')}${btn(current().order.includes(id)?'exclude':'include',(current().order.includes(id)?'移出本次卷宗':'納入本次卷宗'),`data-id="${esc(id)}" ${readonly()?'disabled':''}`,'primary')}</div>`,true);}
+function showDocument(id){const c=current(),d=c.docs.find(x=>x.id===id);if(!d)return;const p={kind:d.kinds[0],title:d.title,caseName:c.name,customer:c.customer,caseId:c.id,status:d.status,filename:d.filename,parts:d.kinds.length,text:d.text};openDialog(d.title,`<div class="row wrap" style="margin-bottom:14px"><span class="format">${esc(d.format)}</span><span class="pill">${esc(d.status)}</span><span class="muted">${d.kinds.length} 頁示例</span></div><div class="source-label">${esc(d.filename)}<br>所屬脈絡：${esc(d.event)}${d.size!==undefined?'<br>檔案大小：'+Math.ceil(d.size/1024)+' KB；內容未保存':''}</div><div style="margin-top:18px">${paper(p)}</div><div class="dialog-actions">${btn('close','返回')}${btn('nav-source','查看案件脈絡','data-id="'+esc(id)+'"')}${btn(current().order.includes(id)?'exclude':'include',(current().order.includes(id)?'移出本次卷宗':'納入本次卷宗'),`data-id="${esc(id)}" ${readonly()?'disabled':''}`,'primary')}</div>`,true);}
 function summaryDialog(){const c=current();openDialog('確認示例整理結果',`<div class="notice">${icon('info')}<span>以下為預設整理結果，並未呼叫 AI。試著修正一項內容，再確認。</span></div><div class="source-label spaced">來源脈絡：${esc(c.name)} → ${c.id==='cmw'?'來訪資料與合成會後紀錄':'兩輪報價與包裝更新待辦'}</div><label for="summary-edit" class="spaced">案件摘要 <span class="muted">最多 420 字</span></label><textarea id="summary-edit" maxlength="420" rows="6">${esc(c.summary)}</textarea><p class="muted" style="font-size:11px;margin-top:8px">你只需確認或修正，不必把既有資訊全部重填。</p><div class="dialog-actions">${btn('ignore-summary','這次略過')}${btn('confirm-summary',icon('check')+'確認此摘要','','primary')}</div>`);}
 function captureFeedbackDraft(){if(!$('opinion'))return;shared.draft={reviewerName:$('reviewer-name').value,opinion:$('opinion').value,difficulty:$('difficulty').value};try{localStorage.setItem(DRAFT,JSON.stringify(shared.draft));}catch{}}
 function feedbackRows(){return shared.view==='shared'?shared.rows:state.feedback;}
 function feedbackCards(rows,remote=false){return rows.length?rows.slice().sort((a,b)=>String(b.createdAt||b.created).localeCompare(String(a.createdAt||a.created))).map(f=>`<article class="feedback-card"><div class="row between wrap"><strong>${esc(f.reviewerName||'舊版未留姓名')} · ${esc(f.type)}</strong><small>${esc(f.created)}</small></div><small>${esc(f.caseName)} · ${esc(f.screen)} · ${esc(f.theme)} / ${esc(f.mode)}</small><p>${esc(f.opinion)}</p><div class="row between wrap spaced"><span class="pill ${remote||f.delivery==='shared'?'good':'warn'}">${remote?'共用資料夾紀錄':f.delivery==='shared'?'曾成功送出':'僅在本機・尚未分享'}</span>${!remote&&f.delivery!=='shared'&&f.app===F.app?btn('retry-feedback','送出這則回饋',`data-id="${esc(f.id)}" ${shared.busy?'disabled':''}`,'small'):''}</div></article>`).join(''):'<div class="empty">目前沒有紀錄。'+(remote?'連接共用資料夾後，按「更新大家的回饋」。':'可以先寫下你的操作意見。')+'</div>';}
 function feedbackDialog(view='write'){
   captureFeedbackDraft();if(view===true)view='local';
-  if(!ui.feedbackContext||!$('dialog').open)ui.feedbackContext={caseId:state.caseId,caseName:current().name,screen:tabNames[ui.tab],theme:names[state.prefs.theme],mode:state.prefs.mode};
+  if(!ui.feedbackContext||!$('dialog').open)ui.feedbackContext={caseId:state.caseId,caseName:ui.tab==='meeting'?'WS 週會 '+wk():current().name,screen:ui.tab==='meeting'?'WS 週會工作台 · '+({agenda:'本週議程',tasks:'決議待辦',outputs:'紀錄提報'}[wu.tab]):tabNames[ui.tab],theme:names[state.prefs.theme],mode:state.prefs.mode};
   shared.view=view;const ctx=ui.feedbackContext,disabled=shared.busy?'disabled':'';
   let content=`<section class="notice" style="display:block"><strong>${shared.dir?'已連接：'+esc(shared.dir.name):'尚未連接共用回饋資料夾'}</strong><p class="muted" style="font-size:11px;margin:7px 0">請選公司共用的「${F.folderName}」資料夾。姓名與回饋會供同仁查閱；每則獨立存檔，不會寫進 HTML。</p><div class="row wrap">${btn('connect-feedback',icon('folder')+(shared.dir?'重新連接':'連接共用資料夾'),disabled,'small')}${btn('refresh-feedback','更新大家的回饋',disabled||(!shared.dir?'disabled':''),'small')}</div><p id="shared-status" role="status" style="font-size:11px;margin-top:8px">${esc(shared.message||'重新整理後請再次連接同一資料夾，才能送出與讀取最新留言。')}</p></section>`;
   content+=`<div class="row wrap" style="margin:18px 0">${btn('feedback','寫意見',disabled,'small '+(view==='write'?'primary':''))}${btn('feedback-shared',`大家的回饋 ${shared.rows.length}`,disabled,'small '+(view==='shared'?'primary':''))}${btn('feedback-list',`本機紀錄 ${state.feedback.length}`,disabled,'small '+(view==='local'?'primary':''))}</div>`;
@@ -277,7 +683,7 @@ case 'toggle-preview':ui.hidePreview=!ui.hidePreview;render();break;
 case 'print':$('print-root').innerHTML=outputPages().map(p=>paper(p)).join('');if($('dialog').open)closeDialog();window.print();break;
 case 'summary':summaryDialog();break;
 case 'ignore-summary':closeDialog();toast('已略過，摘要維持待確認。');break;
-case 'confirm-summary':{const value=$('summary-edit').value.trim();if(!value){$('summary-edit').focus();toast('請留下至少一段摘要。');break;}state=M.edit(state,cid,c=>{c.summary=value;c.confirmed=true;c.stale=false;});persist();closeDialog();render();toast('示例摘要已確認。');break;}
+case 'confirm-summary':{const value=$('summary-edit').value.trim();if(!value){$('summary-edit').focus();toast('請留下至少一段摘要。');break;}state=M.edit(state,cid,c=>{c.summary=value;c.weeklyUpdatedAt=new Date().toISOString();c.confirmed=true;c.stale=false;});persist();closeDialog();render();toast('示例摘要已確認。');break;}
 case 'feedback':feedbackDialog();break;
 case 'feedback-list':feedbackDialog('local');break;
 case 'feedback-shared':feedbackDialog('shared');break;
@@ -289,13 +695,13 @@ case 'feedback-type':ui.feedbackType=el.dataset.type;document.querySelectorAll('
 case 'save-feedback':void submitFeedback(true);break;
 case 'export-json':exportFeedback('json');break;
 case 'export-csv':exportFeedback('csv');break;
-case 'guide':if(ui.tab==='home')ui.tab='dossier';ui.guide=0;render();break;
+case 'guide':if(ui.tab==='meeting'){weeklyGuide();break;}if(ui.tab==='home')ui.tab='dossier';ui.guide=0;render();break;
 case 'guide-prev':ui.guide=Math.max(0,ui.guide-1);renderGuide();break;
 case 'guide-next':if(ui.guide===4){ui.guide=-1;renderGuide();feedbackDialog();}else{ui.guide++;renderGuide();}break;
 case 'guide-close':ui.guide=-1;renderGuide();break;
 case 'files':$('local-files').click();break;
-case 'reset-confirm':openDialog('重置示範案件',`<p>將恢復兩個案例的初始資料，移除本次新增案件、編排與示範輸出版。</p><div class="notice spaced">${icon('message')}已收集的 ${state.feedback.length} 則意見與外觀偏好會保留。</div><div class="dialog-actions">${btn('close','取消')}${btn('reset','重置案件','','primary')}</div>`);break;
-case 'reset':state=M.reset(state);ui.output='draft';ui.page=1;ui.query='';ui.poolFilter='all';ui.tab='dossier';persist();closeDialog();render();toast('案件已重置，使用意見與外觀偏好已保留。');break;
+case 'reset-confirm':resetWeeklyDialog();break;case 'legacy-reset-confirm':openDialog('重置示範案件',`<p>將恢復兩個案例的初始資料，移除本次新增案件、編排與示範輸出版。</p><div class="notice spaced">${icon('message')}已收集的 ${state.feedback.length} 則意見與外觀偏好會保留。</div><div class="dialog-actions">${btn('close','取消')}${btn('reset','重置案件','','primary')}</div>`);break;
+case 'reset':state=M.reset(state);W.init(state);ui.output='draft';ui.page=1;ui.query='';ui.poolFilter='all';ui.tab='dossier';persist();closeDialog();render();toast('案件已重置，使用意見與外觀偏好已保留。');break;
 case 'new-case':openDialog('建立示範案件',`<p class="muted">試試建案的操作負擔，內容只用於這份 Demo。</p><label for="new-name" class="spaced">案件名稱</label><input id="new-name" maxlength="48" placeholder="例如：客戶會議資料整理"><label for="new-customer" class="spaced">客戶／對象</label><input id="new-customer" maxlength="24" placeholder="例如：客戶 A"><div class="dialog-actions">${btn('close','取消')}${btn('create-case','建立示範案件','','primary')}</div>`);break;
 case 'create-case':{const name=$('new-name').value.trim(),customer=$('new-customer').value.trim();if(!name||!customer){toast('請填寫案件名稱與客戶／對象。');(!name?$('new-name'):$('new-customer')).focus();break;}const newId='case-'+Date.now();state.cases[newId]={id:newId,code:'CUSTOM / DEMO',name,customer,type:'自訂示例',period:'本次體驗',status:'待整理',summary:'這是一個剛建立的示範案件。可以選取本機檔案資訊，或加入手寫補充頁體驗編排。',docs:[],order:[],defaultOrder:[],undo:[],changes:[],snapshots:[],confirmed:false,stale:false};state.caseId=newId;ui.tab='dossier';ui.output='draft';ui.page=1;persist();closeDialog();render();toast('示範案件已建立。');break;}
 case 'expenses':openDialog('接待費用・合成示例',`<p class="muted">以下金額為示例，未讀取真實報銷資料。</p><dl class="key-value"><dt>餐敘費</dt><dd>NT$ 8,000</dd><dt>對應證明</dt><dd>收據示例 + 報銷單示例</dd><dt>本幣合計</dt><dd><strong>NT$ 8,000</strong></dd></dl><div class="notice">一筆費用有兩份證明，合計仍只算一次。</div><div class="dialog-actions">${btn('close','返回')}</div>`);break;
@@ -314,7 +720,150 @@ $('dialog').addEventListener('click',e=>{if(e.target===$('dialog')){const b=e.ta
 $('dialog').addEventListener('close',()=>{captureFeedbackDraft();ui.feedbackContext=null;});
 document.addEventListener('input',e=>{if(['reviewer-name','opinion','difficulty'].includes(e.target.id))captureFeedbackDraft();});
 window.addEventListener('resize',fitPaper);
-readStorage();appearance();render();
+const W=WeeklyModel;
+const wu={tab:'agenda',selected:null,projection:false,filter:'all',output:'minutes',history:null,returnScroll:0,caseFilter:''};
+const roles=['業務 A','業務 B','業務 C','業務 D','業務 E','主持人','輪值值日生'];
+const wk=()=>state.meeting.active,ww=()=>W.week(state,wk());
+const wb=(action,label,extra='',cls='small')=>`<button type="button" data-w="${action}" ${extra} class="${glassClasses(action,cls)}">${label}</button>`;
+const wf=(key,label,value='',type='text',full=false)=>`<label class="${full?'full':''}">${label}${type==='textarea'?`<textarea data-w-field="${key}" maxlength="3000">${esc(value)}</textarea>`:`<input data-w-field="${key}" type="${type}" value="${esc(value)}" maxlength="160">`}</label>`;
+const ws=(key,label,value,items,full=false)=>`<label class="${full?'full':''}">${label}<select data-w-field="${key}">${items.map(x=>{const [v,l]=Array.isArray(x)?x:[x,x];return `<option value="${esc(v)}" ${v===value?'selected':''}>${esc(l)}</option>`;}).join('')}</select></label>`;
+const owners=[['','待確認'],...roles.slice(0,5)];
+const linkedCases=()=>[['','一般情報／不掛案件'],...Object.values(state.cases).map(c=>[c.id,c.name])];
+const activeTopic=()=>state.meeting.topics[wu.selected];
+let msgBusy=false,msgReadToken=0;
+function localMailCard(m){return `<article class="wm-local-mail"><div class="row between wrap"><span class="format">MSG · 本機選取</span><span class="pill ${m.subject?'good':'warn'}">${m.subject?'已讀取主旨':'請手動填寫標題'}</span></div><h3 class="spaced">${esc(m.subject||'未取得主旨')}</h3><p class="wm-note">原始檔名：${esc(m.filename)} · ${(m.size/1024).toFixed(1)} KB</p>${m.warning?`<p class="wm-alert">${esc(m.warning)}</p>`:''}<p class="wm-note">只保留檔名、主旨與你填寫的資料；未保存 .msg 原檔。卡片標題可修改，原主旨保留作對照。</p></article>`;}
+async function importLocalMsg(file){
+ if(!file)return;const draft=state.meeting.newTopicDraft;if(!draft||draft.kind!=='email')return;
+ draft.attachmentIds=[...document.querySelectorAll('[data-attach]:checked')].map(x=>x.dataset.attach);
+ const token=++msgReadToken;msgBusy=true;const button=document.querySelector('[data-w="add-topic"]');if(button)button.disabled=true;const picker=document.querySelector('[data-w="msg-pick"]');if(picker){picker.disabled=true;picker.textContent='正在讀取主旨…';}
+ const meta={filename:file.name,size:file.size,lastModified:file.lastModified,subject:'',warning:''};
+ try{if(!/\.msg$/i.test(file.name))throw Error('請選取 .msg 檔；未將檔名當作信件主旨。');if(file.size>MsgSubject.maxBytes)throw Error('本次示範只讀取 25 MB 以下的 .msg，請手動填寫標題。');const parsed=MsgSubject.read(await file.arrayBuffer());meta.subject=parsed.subject;meta.encoding=parsed.encoding;}catch(error){meta.warning=error.message||'主旨讀取失敗，請手動填寫標題。';}
+ finally{if(token===msgReadToken)msgBusy=false;}
+ if(token!==msgReadToken||state.meeting.newTopicDraft!==draft)return;
+ draft.localMail=meta;draft.title=meta.subject.slice(0,160);wt();
+ if($('dialog').open&&document.querySelector('[data-w-form="new"]')){topicDialog('email');if(!meta.subject)document.querySelector('[data-w-form="new"] [data-w-field="title"]')?.focus();}
+ toast(meta.subject?'已帶入信件主旨；可修改卡片標題與註記':'未讀取到主旨，請手動填寫標題');
+}
+function weeklyGuide(){openDialog('週會工作台 · 7 分鐘試用導覽',`<div class="stack"><p><strong>1. 會前</strong>：業務 A 切下週，載入示範 RFQ 郵件並加入議程；業務 B 補一項一般情報。</p><p><strong>2. 開會</strong>：主持人帶入未完成追蹤、排序議題，按開始週會。</p><p><strong>3. 記錄</strong>：值日生填討論、決議及責任期限；有下一步才由決議建立待辦。</p><p><strong>4. 留存</strong>：產生並確認會議紀錄，選擇本案片段加入既有卷宗，試拖拉和預覽。</p><p><strong>5. 提報</strong>：在案件更新週三進度，再選週四提報項目、修改措辭，保留人工稿並確認草稿。</p><p><strong>6. 下週</strong>：沿用未完成任務，回看上一週快照仍保持原樣。</p><div class="notice">預期減少重複口述、抄寫與找資料；尚未驗證效率。責任、期限及可分享內容仍需人工確認。</div><p>請回饋：會前哪些欄位最有用？哪步增加負擔？週四需哪些欄位？卷宗更新是否符合習慣？</p></div><div class="dialog-actions">${wb('reset-dialog','重設本次示範')}${wb('dismiss','開始試用','','primary')}</div>`);}
+function wt(){persist();const el=$('wm-storage');if(el)el.textContent=storageOK?'本機示範已保存 · 同一瀏覽器重新整理可延續':'無法使用本機保存：僅在本次開啟暫存，關閉前請下載輸出。';}
+function savedTime(t){return t?new Date(t).toLocaleString('zh-TW',{hour12:false}):'尚無';}
+function meetingLinks(){
+ $('wm-nav')?.classList.toggle('active',ui.tab==='meeting');
+ if(ui.tab==='meeting')return;
+ const c=current(),tasks=Object.values(state.meeting.tasks).filter(t=>t.caseId===c.id);
+ const block=document.createElement('div');block.className='wm-case-strip';
+ block.innerHTML=`<div class="row between wrap"><span><strong>週會與工作追蹤</strong> · ${ui.tab==='home'?'回到同一份工作脈絡':esc(c.status)}</span>${wb('open','WS 週會工作台 →')}${ui.tab!=='home'?wb('case-progress','更新本案進度','data-case="'+esc(c.id)+'"'):''}</div>${ui.tab!=='home'?`<details><summary>${tasks.length} 項關聯待辦（與週會同步）</summary>${tasks.map(t=>`<div class="wm-history"><span>${esc(t.title)} · ${esc(t.status)} · ${esc(t.owner||'待確認')} · ${esc(t.due||'待確認')}</span>${wb('task-edit','更新任務',`data-id="${esc(t.id)}"`)}</div>`).join('')||'<p class="wm-note">尚無關聯待辦。</p>'}</details>`:''}`;
+ $('stage').prepend(block);
+}
+function storageLine(){return `<p id="wm-storage" class="wm-storage">${storageOK?'本機示範已保存 · 同一瀏覽器重新整理可延續':'無法使用本機保存：僅在本次開啟暫存，關閉前請下載輸出。'}</p>`;}
+function renderMeeting(){
+ renderSidebar();$('wm-nav')?.classList.add('active');document.body.classList.toggle('meeting-projection',wu.projection);$('stage').classList.remove('no-preview');$('guide-container').innerHTML='';
+ const w=ww(),ks=Object.keys(state.meeting.weeks).sort();
+ $('case-head').innerHTML=`<div class="breadcrumb">WS 工作情境 <span>›</span> 週會工作台 <span class="mono">v2.0</span></div><div class="case-title-row"><div><h1>WS 週會工作台</h1><p class="subtitle">把本週進度、討論結論與下一步，放在同一條工作脈絡。</p></div><span class="pill accent">${esc(w.status)}</span></div><div class="wm-toolbar"><label>示範週次<select id="wm-week">${ks.map(k=>`<option ${k===wk()?'selected':''}>${k}</option>`).join('')}</select></label>${wb('prev-week','← 前週')}${wb('next-week','下週 →')}<label>模擬角色<select id="wm-role">${roles.map(r=>`<option ${r===state.meeting.role?'selected':''}>${r}</option>`).join('')}</select></label><span class="wm-note">${esc(w.date.replace('T',' '))}<br>主持：${esc(w.host)} · 值日：${esc(w.clerk)}</span>${wb('schedule','改期／輪值')}${wu.projection?wb('glass-settings','玻璃外觀','id="glass-open-projection" data-glass-open aria-haspopup="dialog" aria-controls="glass-panel" aria-expanded="false"')+wb('stop','結束投影 · Esc','','primary'):wb('start','開始週會','','primary')}</div><p class="wm-note">預載案例為合成；本機選取的主旨由你提供 · 角色僅為同一台電腦的視角切換，並非真實登入、多人同步或權限保護。</p>${storageLine()}${wu.projection?'':`<details class="wm-help"><summary>這個階段我需要做什麼？</summary><p>會前：承辦人補進度與問題。會中：主持人帶議程，值日生補結論、責任人及下一步。會後：承辦人追蹤，主管挑選週四提報內容。</p></details><nav class="tabs wm-header-tabs" aria-label="週會分區">${[['agenda','本週議程／開會'],['tasks','決議與待辦追蹤'],['outputs','紀錄與提報輸出']].map(([k,l])=>wb('tab',l,`data-tab="${k}" aria-current="${wu.tab===k?'page':'false'}"`,wu.tab===k?'active':'')).join('')}</nav>`}`;
+ $('stage').innerHTML=wu.tab==='tasks'&&!wu.projection?tasksView():wu.tab==='outputs'&&!wu.projection?outputsView():agendaView();
+}
+function agendaView(){const list=W.topics(state,wk()),active=list.filter(t=>!t.excluded);if(!list.some(t=>t.id===wu.selected))wu.selected=active[0]?.id||list[0]?.id||null;
+ return `${wu.projection?'':`<div class="workspace-intro wrap"><div class="row wrap">${wb('reference','＋ 引用案件')}${wb('general','＋ 新增一般議題')}${wb('email','載入郵件／.msg')}${wb('carry','帶入未完成追蹤')}</div><span class="wm-note">${active.length} 項議程 · ${list.length-active.length} 項已排除</span></div>`}<div class="wm-layout"><section class="wm-agenda-list"><div class="wm-list">${list.map((t,i)=>`<article><button class="wm-topic ${wu.selected===t.id?'active':''}" data-w="select" data-id="${t.id}"><div class="row between"><span class="eyebrow">${String(i+1).padStart(2,'0')} / ${esc(t.category)}</span><span class="wm-badge">${t.excluded?'已排除':t.internal?'僅部門內部':t.taskId?'持續追蹤':'本週議題'}</span></div><h3>${esc(t.title)}</h3><small>${esc(t.owner||'負責人待確認')} · ${esc(state.cases[t.caseId]?.customer||'一般情報')}</small>${t.localMail?'<small>MSG · '+esc(t.localMail.filename)+'</small>':''}${t.note?'<p class="wm-note wm-card-note">註記：'+esc(t.note.slice(0,100))+'</p>':''}</button><div class="row wrap" style="margin:4px 0 10px">${wb('topic-up','↑',`data-id="${t.id}" aria-label="上移 ${esc(t.title)}" ${i===0?'disabled':''}`)}${wb('topic-down','↓',`data-id="${t.id}" aria-label="下移 ${esc(t.title)}" ${i===list.length-1?'disabled':''}`)}${wb('exclude',t.excluded?'恢復':'排除',`data-id="${t.id}"`)}</div></article>`).join('')||'<div class="wm-empty">先引用一個案件，或載入示範郵件。</div>'}</div></section><section>${activeTopic()?topicView(activeTopic()):'<div class="wm-empty">新增議題後，即可填寫進度與討論問題。</div>'}</section></div>`;
+}
+function sourceView(t){return `<details class="wm-source"><summary>查看來源 · ${esc(t.source)}</summary>${t.localMail?localMailCard(t.localMail):''}${t.mail&&!t.localMail?`<p><strong>${esc(t.mail.subject)}</strong><br>寄件時間：${esc(t.mail.sent)}<br>寄件者：${esc(t.mail.from)}</p><p>${esc(t.mail.body)}</p><div class="row wrap">${t.mail.attachments.map(a=>`<span class="pill">${esc(a)}</span>`).join('')}</div><p class="wm-note">預載示範資料，未解析真實 .msg；附件卡也是合成內容。</p>`:''}${t.caseId?`<p>關聯案件：${esc(state.cases[t.caseId]?.name)}</p><div class="row wrap">${wb('case-open','回到案件',`data-case="${esc(t.caseId)}"`)}${(t.attachmentIds||[]).map(id=>{const d=state.cases[t.caseId]?.docs.find(d=>d.id===id);return d?wb('attachment',esc(d.title),`data-case="${esc(t.caseId)}" data-id="${esc(id)}"`):'';}).join('')}</div>`:'<p>一般情報，沒有建立案件副本。</p>'}</details>`;}
+function topicView(t){const task=state.meeting.tasks[t.taskId];return `<article class="panel wm-card" id="wm-topic-editor" data-topic="${t.id}"><div class="wm-section-title"><div><span class="eyebrow">${wu.projection?'MEETING / 現在報告':'PREPARE / 議題內容'}</span><h2>${esc(t.title)}</h2></div>${t.excluded?'<span class="pill warn">已排除，不列入本週產稿</span>':`<span class="pill">${esc(t.category)}</span>`}</div>${wu.projection?`<p class="wm-context">${esc(task?.updates[wk()]||t.progress||'本週進度待補')}</p><p class="wm-context spaced">討論焦點：${esc(t.question||'待補')}</p><div class="wm-actions">${wb('previous-topic','← 上一議題')}${wb('next-topic','下一議題 →')}</div>`:''}${sourceView(t)}<details ${wu.projection?'':'open'}><summary>會前內容與負責人</summary><div class="wm-form spaced" data-w-form="topic" data-id="${t.id}">${wf('title','議題標題',t.title)}${ws('owner','負責人',t.owner,owners)}${ws('category','類別',t.category,['情報共有','需討論','追蹤'])}<label>提出人<input value="${esc(t.proposer)}" readonly></label>${wf('progress','本週進度',task?.updates[wk()]||t.progress,'textarea',true)}${wf('question','待討論問題',t.question,'textarea',true)}${wf('note','卡片註記（不自動帶入提報）',t.note||'','textarea',true)}<label class="wm-check full"><input type="checkbox" data-w-field="internal" ${t.internal?'checked':''}>僅部門內部，不納入公司提報</label></div></details>${task?`<div class="wm-source spaced"><strong>沿用任務 ${esc(task.id)}</strong><p>${esc(task.title)} · ${esc(task.status)}<br>原期限：${esc(task.originalDue||'待確認')}；目前期限：${esc(task.due||'待確認')}<br>上次進度：${esc(W.priorUpdate(task,wk()))}</p>${wb('task-edit','更新既有待辦',`data-id="${task.id}"`)}</div>`:''}<hr class="divider"><h3>會中紀錄</h3><p class="wm-note">值日生確認後填寫；留白會明示待補／待確認。決議不會自動建立待辦。</p><div class="wm-form spaced" data-w-form="topic" data-id="${t.id}">${wf('discussion','本次討論',t.discussion,'textarea',true)}${wf('decision','本次決議',t.decision,'textarea',true)}${ws('responsible','決議責任人',t.responsible,owners)}${wf('due','期限（未定可留白）',t.due,'date')}${wf('next','下一步',t.next,'textarea',true)}</div><div class="wm-actions">${wb('save-topic','保存本次紀錄','','primary')}${task?wb('task-edit','查看／更新關聯待辦',`data-id="${task.id}"`):wb('create-task','由決議建立待辦')}${wb('go-output','整理會議紀錄 →')}</div><p class="wm-note spaced">輸入會保留於本機示範狀態，按保存確認目前內容。</p></article>`;}
+function taskCard(t){return `<article class="panel wm-card"><div class="wm-section-title"><h3>${esc(t.title)}</h3><span class="pill ${t.status==='已完成'?'good':'warn'}">${esc(t.status)}</span></div><p class="wm-note">${esc(t.id)} · ${esc(t.owner||'責任人待確認')} · ${esc(state.cases[t.caseId]?.name||'一般工作')}<br>期限：${esc(t.due||'待確認')} · 原期限：${esc(t.originalDue||'待確認')}</p><p class="spaced">${esc(t.updates[wk()]||'本週尚未更新')}</p><p class="wm-note spaced">上次：${esc(W.priorUpdate(t,wk()))}</p><div class="wm-actions">${wb('task-edit','更新狀態／進度',`data-id="${t.id}"`)}${t.caseId?wb('case-open','關聯案件',`data-case="${esc(t.caseId)}"`):''}</div></article>`;}
+function tasksView(){const me=state.meeting.role==='輪值值日生'?ww().clerk:state.meeting.role;const tasks=Object.values(state.meeting.tasks).filter(t=>!wu.caseFilter||t.caseId===wu.caseFilter).filter(t=>wu.filter!=='mine'||t.owner===me);return `<div class="wm-section-title"><div><h2>決議與待辦追蹤</h2><p class="wm-note">任務沿用同一編號；狀態是目前值，每週進度各自保留。</p></div>${wb('carry','帶入本週議程')}</div><div class="wm-subnav">${wb('task-filter','週會追蹤','data-filter="all"',wu.filter==='all'?'active':'')}${wb('task-filter','我的待辦','data-filter="mine"',wu.filter==='mine'?'active':'')}${wu.caseFilter?wb('clear-case-filter','取消案件篩選'):''}</div><div class="wm-task-grid">${tasks.map(taskCard).join('')||'<div class="wm-empty">此視角尚無待辦；可切換業務 A 查看示例。</div>'}</div><h3 class="spaced">本週決議（包括不需待辦的結論）</h3>${W.topics(state,wk()).filter(t=>!t.excluded&&t.decision).map(t=>`<div class="wm-case-strip spaced"><strong>${esc(t.title)}</strong><p>${esc(t.decision)}</p><small>${t.taskId?'關聯任務 '+esc(t.taskId):'僅記錄決議，未建立待辦'}</small>${wb('select', '查看議題',`data-id="${t.id}"`)}</div>`).join('')||'<p class="wm-note spaced">尚無已填決議。</p>'}`;}
+function outputSelector(){const w=ww();return `<section class="panel wm-card"><h3>主管挑選週四提報內容</h3><p class="wm-note">另行整理對上措辭；內部討論及決議原文不自動帶入。以下為暫定示範欄位，仍需人工檢查。</p><div class="wm-list spaced">${W.topics(state,wk()).filter(t=>!t.excluded).map(t=>`<label class="wm-check"><input type="checkbox" data-report-select="${t.id}" ${w.reportIds.includes(t.id)&&!t.internal?'checked':''} ${t.internal?'disabled':''}><span>${esc(t.title)} ${t.internal?'<span class="pill warn">僅部門內部・不可選入</span>':''}</span></label>`).join('')}</div><div class="spaced"><h3>提報順序</h3>${w.reportIds.filter(id=>state.meeting.topics[id]&&!state.meeting.topics[id].internal&&!state.meeting.topics[id].excluded).map((id,i)=>`<div class="wm-history"><span>${i+1}. ${esc(state.meeting.topics[id].title)}</span><div>${wb('report-up','↑',`data-id="${id}" aria-label="提報上移 ${esc(state.meeting.topics[id].title)}"`)}${wb('report-down','↓',`data-id="${id}" aria-label="提報下移 ${esc(state.meeting.topics[id].title)}"`)}</div></div>`).join('')}</div></section>`;}
+function outputsView(){const kind=wu.output,w=ww(),d=w.drafts[kind],versions=w.versions[kind];return `<div class="wm-subnav">${wb('output-type','週一會議紀錄','data-kind="minutes"',kind==='minutes'?'active':'')}${wb('output-type','週四公司提報','data-kind="report"',kind==='report'?'active':'')}</div>${kind==='report'?outputSelector():`<div class="notice">依已填欄位整理的示範草稿，未使用 AI／語音辨識。未記錄的議題會列待補，不補造結論。</div>`}<section class="panel wm-card spaced"><div class="wm-section-title"><h2>${kind==='minutes'?'會議紀錄':'WS 單位提報'} · ${d?'草稿 v'+d.revision:'尚未產稿'}</h2><span class="pill warn">${kind==='report'?'草稿・尚未送出':'待人工確認'}</span></div><div id="wm-stale">${d&&W.stale(state,wk(),kind)?'<div class="wm-alert">草稿來源有更新，請重新整理。人工修改會先保留備份。</div>':''}</div>${d?`<p class="wm-note">整理時間：${savedTime(d.createdAt)} · ${d.manual?'含人工修改':'規則套版'} · 來源 ${d.rows.length} 項</p><label for="wm-draft" class="wm-note">可修改措辭、刪去不適合本用途的段落；輸出與此文字一致</label><textarea id="wm-draft" class="wm-editor spaced" spellcheck="false">${esc(d.text)}</textarea>`:'<p class="wm-note">先完成議題與記錄，再產生可編輯草稿。</p>'}<div class="wm-actions">${wb('generate',d?'重新整理草稿':'產生'+(kind==='minutes'?'會議紀錄草稿':'WS 提報草稿'),'','primary')}${d?wb('preview-draft','預覽'):''}${d?wb('confirm-draft',kind==='minutes'?'確認保存紀錄版本':'確認保存提報草稿（不送出）'):''}${d?wb('download-draft','下載文字'):''}${d?wb('copy-draft','複製文字'):''}${d?wb('print-draft','列印'):''}</div></section><section class="panel wm-card"><h3>已確認示範版本</h3><p class="wm-note">保存當時快照；更正請另存下一版。${kind==='report'?'仍是提報草稿，沒有真實送出。':'卷宗只選入各案件相關片段。'}</p>${versions.slice().reverse().map(v=>`<div class="wm-history"><span>v${v.number} · ${savedTime(v.confirmedAt)}</span><div>${wb('version','查看快照',`data-id="${v.id}"`)}${kind==='minutes'?wb('dossier-select','選擇內容納入案件卷宗',`data-id="${v.id}"`):''}</div></div>`).join('')||'<p class="wm-note spaced">尚無確認版本。</p>'}<details class="spaced"><summary>重新產稿前的保留稿（${w.backups.filter(b=>b.kind===kind).length}）</summary>${w.backups.map((b,i)=>b.kind===kind?`<div class="wm-history"><span>原草稿 v${b.revision} · ${savedTime(b.savedAt)}</span>${wb('backup','查看／下載原稿',`data-index="${i}"`)}</div>`:'').join('')}</details></section>`;}
+function topicDialog(kind){const mail={subject:'【合成 RFQ】輪圈追加紙箱包裝詢價',sent:'2026-09-18 14:20（示範時間）',from:'示例客戶採購 <buyer@example.invalid>',body:'請依目前輪圈報價，確認追加紙箱包裝的規格、費用與交期。本內容僅供介面試用，並非公司真實郵件。',attachments:['輪圈規格示例.pdf','包裝需求示例.xlsx']};
+ const draft=state.meeting.newTopicDraft?.kind===kind?state.meeting.newTopicDraft:{kind,title:kind==='email'?'RFQ｜追加紙箱包裝':kind==='reference'?'案件進度討論':'',owner:roles.slice(0,5).includes(state.meeting.role)?state.meeting.role:'',caseId:kind==='general'?'':'frdc',category:kind==='general'?'情報共有':'需討論',progress:'',question:'',internal:false};state.meeting.newTopicDraft=draft;
+ openDialog(kind==='email'?(draft.localMail?'本機郵件 · 建立議題':'載入郵件 · 示範 RFQ'):kind==='reference'?'引用案件與附件':'新增一般議題',`${kind==='email'?`<div class="wm-source" id="wm-mail-source"><div class="wm-actions" style="margin:0 0 14px">${wb('msg-pick','選取本機 .msg','','primary')}${draft.localMail?wb('msg-demo','改用示範郵件'):''}</div><p class="wm-note">選取後讀取主旨並帶入卡片，可改標題及註記；不傳送檔案、不解析信件內文或附件內容。</p>${draft.localMail?localMailCard(draft.localMail):`<div class="wm-source spaced"><span class="format">RFQ示例.msg</span><h3>${esc(mail.subject)}</h3><p>${esc(mail.sent)}<br>${esc(mail.from)}</p><p>${esc(mail.body)}</p><div class="row wrap">${mail.attachments.map(a=>`<span class="pill">${esc(a)}</span>`).join('')}</div><p class="wm-note">預載示範資料，未解析真實 .msg。</p></div>`}</div>`:'<p class="wm-note">只建立來源關聯，不複製案件。</p>'}<div class="wm-form" data-w-form="new">${wf('title','議題標題（必填）',draft.title)}${ws('owner','負責人',draft.owner,owners)}${ws('category','類別',draft.category,['情報共有','需討論','追蹤'])}${ws('caseId','關聯案件',draft.caseId,[...linkedCases(),['new','＋ 模擬新增 RFQ 案件']])}${wf('newCaseName','新案件名稱（選新增時填）',draft.newCaseName||'RFQ 包裝詢價示例','text',true)}${wf('progress','本週進度',draft.progress,'textarea',true)}${wf('question','待討論問題',draft.question,'textarea',true)}${wf('note','卡片註記（加入後仍可修改）',draft.note||'','textarea',true)}<label class="wm-check full"><input data-w-field="internal" type="checkbox" ${draft.internal?'checked':''}>僅部門內部</label></div><details class="spaced" id="wm-attach-select"><summary>選擇關聯附件（不複製原件）</summary>${attachmentChoices(draft.caseId)}</details><div class="dialog-actions">${wb('dismiss','取消（保留輸入）')}${wb('add-topic','加入 '+wk()+' 議程',`data-kind="${kind}"`,'primary')}</div>`);wu.mail=mail;$('dialog').scrollTop=0;
+}
+function attachmentChoices(caseId){return (state.cases[caseId]?.docs||[]).map(d=>`<label class="wm-check spaced"><input type="checkbox" data-attach="${esc(d.id)}" ${state.meeting.newTopicDraft?.attachmentIds?.includes(d.id)?'checked':''}>${esc(d.title)}</label>`).join('')||'<p class="wm-note">沒有可引用的既有附件。</p>';}
+function carryDialog(){const list=Object.values(state.meeting.tasks).filter(t=>t.createdWeek<wk()&&t.status!=='已完成');openDialog('帶入前週未完成追蹤',`<p class="wm-note">勾選後沿用原任務，不改原期限；完成項不自動重開。</p>${list.map(t=>{const exists=W.topics(state,wk()).some(x=>x.taskId===t.id);return `<div class="wm-source spaced"><label class="wm-check"><input type="checkbox" data-carry="${t.id}" ${exists?'disabled':'checked'}><strong>${esc(t.title)} ${exists?'（本週已有）':''}</strong></label><p>原期限：${esc(t.originalDue||'待確認')} · ${esc(t.owner||'待確認')}<br>上次進度：${esc(W.priorUpdate(t,wk()))}</p></div>`;}).join('')||'<div class="wm-empty">沒有可帶入的未完成項目。</div>'}<div class="dialog-actions">${wb('dismiss','返回')}${wb('carry-confirm','帶入所選項目','','primary')}</div>`);}
+function taskDialog(id){const t=state.meeting.tasks[id];if(!t)return;openDialog('更新待辦 · '+t.id,`<p class="wm-note">原期限：${esc(t.originalDue||'待確認')}；本次更新歸在 ${wk()}。此處調整的是同一筆任務。</p><div class="wm-form spaced" data-w-form="task" data-id="${t.id}">${wf('title','任務',t.title,'text',true)}${ws('owner','責任人',t.owner,owners)}${ws('status','目前狀態',t.status,['待處理','進行中','待協調','已完成'])}${wf('due','目前期限（可人工調整）',t.due,'date')}${wf('progress','本週進度',t.updates[wk()]||'','textarea',true)}</div><details class="spaced"><summary>跨週更新紀錄</summary>${Object.entries(t.updates).map(([k,p])=>`<p>${esc(k)}：${esc(p)}</p>`).join('')}</details><div class="dialog-actions">${wb('task-done','保存並返回','','primary')}</div>`);}
+function scheduleDialog(){const w=ww();openDialog('示範改期與輪值',`<p class="wm-note">只修改本次示範會議，不建立真實行事曆或排程。</p><div class="wm-form spaced" data-w-form="schedule">${wf('date','會議日期時間',w.date,'datetime-local',true)}${ws('host','主持人',w.host,['主持人',...roles.slice(0,5)])}${ws('clerk','輪值值日生',w.clerk,roles.slice(0,5))}</div><div class="dialog-actions">${wb('schedule-done','保存並返回','','primary')}</div>`);}
+function caseProgressDialog(id){const c=state.cases[id];openDialog('模擬週二／三更新案件',`<p class="wm-note">填寫最新進度，再回到週四提報重新整理；已確認週一紀錄保留原樣。</p><div class="wm-form spaced" data-w-form="case" data-id="${esc(id)}">${wf('status','案件最新狀態',c.status,'text',true)}${wf('summary','案件工作摘要',c.summary,'textarea',true)}</div><div class="dialog-actions">${wb('case-done','保存並返回','','primary')}</div>`);}
+function resetWeeklyDialog(){openDialog('重設本次 v2.0 示範',`<p>只恢復此版的合成案件、週會、任務、草稿與版本。這些本機練習內容會被移除，請先下載要保留的輸出。</p><p class="spaced">舊版 HTML／舊版草稿、已收集回饋與外觀偏好均保留。</p><div class="dialog-actions">${wb('dismiss','取消')}${wb('reset-v2','確認重設此版','','primary')}</div>`);}
+function switchWeek(delta){const d=new Date(wk()+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+delta*7);state.meeting.active=d.toISOString().slice(0,10);W.week(state,wk());wu.selected=null;wu.projection=false;wt();render();}
+function showOutputText(title,text,downloadName){openDialog(title,`<pre class="wm-pre">${esc(text)}</pre><div class="dialog-actions">${wb('dismiss','返回')}${wb('download-view','下載此份文字','','primary')}</div>`,true);wu.viewText=text;wu.viewName=downloadName;}
+function dossierDialog(versionId,caseId){const v=ww().versions.minutes.find(x=>x.id===versionId);if(!v)return;const caseIds=[...new Set(v.rows.map(r=>r.caseId).filter(Boolean))];const cid=caseId||caseIds[0];openDialog('選擇本案要納入的紀錄片段',`<p class="wm-note">來源為已確認紀錄 v${v.number} 的議題快照；會議全文的人工文字不會自動拆分至案件。請核對下列片段，可回到議題更正後另存版本。</p><label class="spaced">案件<select id="wm-dossier-case" data-version="${v.id}">${caseIds.map(id=>`<option value="${esc(id)}" ${cid===id?'selected':''}>${esc(state.cases[id]?.name)}</option>`).join('')}</select></label>${v.rows.filter(r=>r.caseId===cid).map(r=>`<div class="wm-source spaced"><label class="wm-check"><input type="checkbox" data-dossier-row="${r.id}" checked><strong>${esc(r.title)}</strong></label><pre class="wm-pre">${esc(W.minuteRow(r))}</pre></div>`).join('')||'<p>本份紀錄沒有關聯案件片段。</p>'}<p class="wm-note">只加入所選案件的草稿；原已保存卷宗保持原樣。片段頁數為示範估算。</p><div class="dialog-actions">${wb('dismiss','取消')}${wb('dossier-confirm','納入並前往卷宗',`data-version="${v.id}" ${cid?'':'disabled'}`,'primary')}</div>`,true);}
+function renderKeepFocus(){const action=document.activeElement?.dataset.w,id=document.activeElement?.dataset.id;render();if(action){const candidate=[...document.querySelectorAll('[data-w]')].find(e=>e.dataset.w===action&&e.dataset.id===id);candidate?.focus();}}
+document.addEventListener('input',e=>{
+ const target=e.target,field=target.dataset.wField,form=target.closest('[data-w-form]');
+ if(target.id==='wm-draft'){const d=ww().drafts[wu.output];d.text=target.value;d.manual=true;wt();return;}
+ if(!field||!form)return;const value=target.type==='checkbox'?target.checked:target.value;const kind=form.dataset.wForm;
+ if(kind==='topic'){const t=state.meeting.topics[form.dataset.id];t[field]=value;t.updatedAt=W.now();if(field==='progress'&&t.taskId)W.updateTask(state,t.taskId,wk(),{progress:value});if(field==='internal'&&value)ww().reportIds=ww().reportIds.filter(id=>id!==t.id);}
+ if(kind==='task')W.updateTask(state,form.dataset.id,wk(),{[field]:value});
+ if(kind==='schedule')ww()[field]=value;
+ if(kind==='case'){state.cases[form.dataset.id][field]=value;state.cases[form.dataset.id].weeklyUpdatedAt=W.now();}
+ if(kind==='new'){state.meeting.newTopicDraft[field]=value;if(field==='caseId')$('wm-attach-select').innerHTML='<summary>選擇關聯附件（不複製原件）</summary>'+attachmentChoices(value);}
+ wt();
+});
+document.addEventListener('change',e=>{const el=e.target;
+ if(el.id==='wm-week'){state.meeting.active=el.value;wu.selected=null;wu.projection=false;wt();render();}
+ if(el.id==='wm-role'){state.meeting.role=el.value;wt();render();}
+ if(el.dataset.reportSelect){const id=el.dataset.reportSelect;ww().reportIds=ww().reportIds.filter(x=>x!==id);if(el.checked&&!state.meeting.topics[id].internal)ww().reportIds.push(id);wt();render();}
+ if(el.id==='wm-dossier-case')dossierDialog(el.dataset.version,el.value);
+});
+document.addEventListener('click',async e=>{const el=e.target.closest('[data-w]');if(!el||el.disabled)return;const a=el.dataset.w,id=el.dataset.id;
+ try{switch(a){
+ case 'open':ui.tab='meeting';wu.projection=false;render();break;
+ case 'tab':wu.tab=el.dataset.tab;render();break;
+ case 'prev-week':switchWeek(-1);break;
+ case 'next-week':switchWeek(1);break;
+ case 'schedule':scheduleDialog();break;
+ case 'schedule-done':if(!ww().date){toast('請設定示範日期時間');break;}closeDialog();render();toast('已更新本機示範會議');break;
+ case 'select':wu.tab='agenda';wu.selected=id;render();$('wm-topic-editor')?.scrollIntoView({block:'nearest'});break;
+ case 'topic-up':case 'topic-down':{const arr=ww().order,i=arr.indexOf(id),j=i+(a==='topic-up'?-1:1);if(j>=0&&j<arr.length)[arr[i],arr[j]]=[arr[j],arr[i]];wt();renderKeepFocus();break;}
+ case 'exclude':state.meeting.topics[id].excluded=!state.meeting.topics[id].excluded;wt();renderKeepFocus();break;
+ case 'reference':topicDialog('reference');break;
+ case 'general':topicDialog('general');break;
+ case 'email':topicDialog('email');break;
+ case 'msg-pick':$('wm-msg-file').click();break;
+ case 'msg-demo':{const d=state.meeting.newTopicDraft;delete d.localMail;d.title='RFQ｜追加紙箱包裝';wt();topicDialog('email');break;}
+ case 'add-topic':{if(msgBusy){toast('正在讀取主旨，請稍候');break;}const d=state.meeting.newTopicDraft;if(!d.title.trim()){toast('請填寫議題標題');document.querySelector('[data-w-form="new"] [data-w-field="title"]').focus();break;}let cid=d.caseId;if(cid==='new'){if(!d.newCaseName?.trim()){toast('請填寫新案件名稱');break;}cid='case-weekly-'+(++state.meeting.sequence);state.cases[cid]={id:cid,code:'RFQ / DEMO',name:d.newCaseName,customer:'示例客戶',type:'報價案件',period:wk(),status:'RFQ 待確認',summary:d.progress||'合成詢價資料待整理',docs:[],order:[],defaultOrder:[],undo:[],changes:[],snapshots:[],confirmed:false,stale:false};}
+ const data={...d,caseId:cid,source:d.localMail?'本機 .msg 主旨':d.kind==='email'?'示範 RFQ 郵件':d.kind==='reference'?'引用案件':'一般情報（合成）',attachmentIds:[...document.querySelectorAll('[data-attach]:checked')].map(x=>x.dataset.attach)};if(d.kind==='email'&&!d.localMail)data.mail=wu.mail;const t=W.addTopic(state,wk(),data);wu.selected=t.id;state.meeting.newTopicDraft=null;wt();closeDialog();render();toast('已加入議程，可繼續補充或排序');break;}
+ case 'dismiss':closeDialog();break;
+ case 'carry':carryDialog();break;
+ case 'carry-confirm':{const ids=[...document.querySelectorAll('[data-carry]:checked')].map(x=>x.dataset.carry);const n=W.carry(state,wk(),ids).length;wt();closeDialog();render();toast(`已帶入 ${n} 項；同一任務不重複新增`);break;}
+ case 'start':{const topics=W.topics(state,wk()).filter(t=>!t.excluded);if(!topics.length){toast('請先加入議題');break;}wu.returnScroll=window.scrollY;wu.projection=true;wu.tab='agenda';if(!topics.some(t=>t.id===wu.selected))wu.selected=topics[0].id;ww().status='會議進行中';wt();render();window.scrollTo(0,0);break;}
+ case 'stop':wu.projection=false;ww().status=ww().versions.minutes.length?'紀錄已確認':'待整理紀錄';wt();render();window.scrollTo(0,wu.returnScroll);break;
+ case 'previous-topic':case 'next-topic':{const ts=W.topics(state,wk()).filter(t=>!t.excluded),at=ts.findIndex(t=>t.id===wu.selected),next=Math.max(0,Math.min(ts.length-1,at+(a==='next-topic'?1:-1)));wu.selected=ts[next]?.id;render();break;}
+ case 'save-topic':if(!activeTopic().title.trim()){toast('議題標題不可空白');break;}wt();renderKeepFocus();toast('本次紀錄已'+(storageOK?'保存於本機示範':'暫存於此頁'));break;
+ case 'create-task':{const t=activeTopic();if(!t.decision.trim()){toast('請先填寫決議');document.querySelector('[data-w-field="decision"]').focus();break;}openDialog('由決議建立待辦',`<p>${esc(t.next||t.decision)}</p><p class="spaced">責任人：${esc(t.responsible||'待確認')} · 期限：${esc(t.due||'待確認')}</p><p class="wm-note spaced">只有確認此步驟才建立任務。單純保存決議不會增加任務。</p><div class="dialog-actions">${wb('dismiss','只保留決議')}${wb('task-create-confirm','建立一項待辦',`data-id="${t.id}"`,'primary')}</div>`);break;}
+ case 'task-create-confirm':W.taskFromTopic(state,id);wt();closeDialog();render();toast('已建立關聯待辦，可跨週沿用');break;
+ case 'task-edit':taskDialog(id);break;
+ case 'task-done':closeDialog();render();toast('同一筆待辦已更新');break;
+ case 'task-filter':wu.filter=el.dataset.filter;render();break;
+ case 'clear-case-filter':wu.caseFilter='';render();break;
+ case 'go-output':wu.projection=false;wu.tab='outputs';wu.output='minutes';render();break;
+ case 'case-open':state.caseId=el.dataset.case;ui.tab='overview';ui.output='draft';wu.projection=false;wt();render();break;
+ case 'attachment':state.caseId=el.dataset.case;showDocument(id);break;
+ case 'case-progress':caseProgressDialog(el.dataset.case);break;
+ case 'case-done':closeDialog();render();toast('案件最新進度已更新；可回週會檢查草稿');break;
+ case 'output-type':wu.output=el.dataset.kind;render();break;
+ case 'report-up':case 'report-down':{const arr=ww().reportIds,i=arr.indexOf(id),j=i+(a==='report-up'?-1:1);if(i>=0&&j>=0&&j<arr.length)[arr[i],arr[j]]=[arr[j],arr[i]];wt();renderKeepFocus();break;}
+ case 'generate':if(ww().drafts[wu.output]?.manual){openDialog('重新整理前，保留人工修改',`<p>目前草稿含人工修改。你可以保留原稿繼續編輯；或先保存原稿備份，再取用最新來源重產。</p><div class="dialog-actions">${wb('dismiss','保留原稿，不重產')}${wb('generate-replace','備份人工稿並重新產生','','primary')}</div>`);}else{W.generate(state,wk(),wu.output);wt();render();}break;
+ case 'generate-replace':W.generate(state,wk(),wu.output,true);wt();closeDialog();render();toast('原稿已保留在下方保留稿');break;
+ case 'preview-draft':showOutputText('預覽 · '+(wu.output==='minutes'?'會議紀錄':'WS 提報草稿'),ww().drafts[wu.output].text,`WS-${wk()}-${wu.output}-草稿.txt`);break;
+ case 'confirm-draft':{const v=W.confirm(state,wk(),wu.output);wt();render();toast(`已保存示範版本 v${v.number}${wu.output==='report'?'，尚未送出':''}`);break;}
+ case 'download-draft':download(`WS-${wk()}-${wu.output}-草稿.txt`,ww().drafts[wu.output].text,'text/plain;charset=utf-8');break;
+ case 'copy-draft':try{await navigator.clipboard.writeText(ww().drafts[wu.output].text);toast('已複製當下草稿文字');}catch{openDialog('請手動複製',`<p>此瀏覽器未允許自動複製，請選取下方文字後按 Ctrl+C。</p><textarea id="wm-copy" class="wm-editor">${esc(ww().drafts[wu.output].text)}</textarea>`);$('wm-copy').select();}break;
+ case 'print-draft':$('print-root').innerHTML=`<pre class="wm-pre">${esc(ww().drafts[wu.output].text)}</pre>`;document.body.classList.add('wm-print');window.print();break;
+ case 'version':{const v=ww().versions[wu.output].find(v=>v.id===id);showOutputText('當時快照 v'+v.number+(wu.output==='report'?' · 尚未送出':''),v.text,`WS-${wk()}-${wu.output}-v${v.number}.txt`);break;}
+ case 'backup':{const b=ww().backups[+el.dataset.index];showOutputText('保留原稿',b.text,`WS-${wk()}-保留稿.txt`);break;}
+ case 'download-view':download(wu.viewName,wu.viewText,'text/plain;charset=utf-8');break;
+ case 'dossier-select':dossierDialog(id);break;
+ case 'dossier-confirm':{const cid=$('wm-dossier-case').value,ids=[...document.querySelectorAll('[data-dossier-row]:checked')].map(x=>x.dataset.dossierRow);if(!ids.length){toast('請選擇至少一項相關內容');break;}const n=W.toDossier(state,wk(),el.dataset.version,cid,ids);state.caseId=cid;ui.tab='dossier';ui.output='draft';ui.page=1;wt();closeDialog();render();toast(`已加入 ${n} 個本案片段，原保存卷宗保持不變`);break;}
+ case 'reset-dialog':resetWeeklyDialog();break;
+ case 'reset-v2':state=M.reset(state);W.init(state);wu.selected=null;wu.projection=false;wu.tab='agenda';wu.output='minutes';ui.tab='meeting';wt();closeDialog();render();toast('已重設此版示範，回饋與舊版資料保留');break;
+ }}catch(error){toast(error.message||'操作未完成，請檢查輸入');}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&wu.projection&&!$('dialog').open){e.preventDefault();document.querySelector('[data-w="stop"]')?.click();}});
+window.addEventListener('afterprint',()=>document.body.classList.remove('wm-print'));
+const nav=document.createElement('button');nav.id='wm-nav';nav.dataset.w='open';nav.title='WS 週會工作台';nav.setAttribute('aria-label','WS 週會工作台');nav.innerHTML=icon('users')+'<span class="side-label">WS 週會工作台</span>';document.querySelector('.side-nav').prepend(nav);
+const mobile=document.createElement('button');mobile.className='small wm-mobile-entry';mobile.dataset.w='open';mobile.textContent='週會工作台';document.querySelector('.topbar-actions').prepend(mobile);
+const reset=document.createElement('button');reset.className='small ghost';reset.dataset.w='reset-dialog';reset.textContent='重設本次示範';document.querySelector('.side-bottom').append(reset);
+const msgInput=document.createElement('input');msgInput.type='file';msgInput.accept='.msg';msgInput.id='wm-msg-file';msgInput.hidden=true;msgInput.setAttribute('aria-label','選取本機 Outlook MSG 檔');document.body.append(msgInput);msgInput.addEventListener('change',()=>{const file=msgInput.files[0];msgInput.value='';void importLocalMsg(file);});
+
+readStorage();W.init(state);appearance();persist();render();initGlass();
 })();
 </script>
 </body></html>
